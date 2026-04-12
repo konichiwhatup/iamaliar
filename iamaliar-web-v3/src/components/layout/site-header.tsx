@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/collection", label: "Collection" },
   { href: "/contact", label: "Contact" },
 ];
@@ -20,11 +21,8 @@ export function SiteHeader() {
     <>
       <header
         style={{ mixBlendMode: "difference" }}
-        className="fixed top-0 left-0 right-0 z-50 px-12 py-8 flex justify-between items-center"
+        className="fixed top-0 left-0 right-0 z-50 px-12 py-8 flex justify-center items-center"
       >
-        <Link href="/" className="font-serif text-[1.1rem] font-light tracking-[0.25em] lowercase text-[#e8e2d8] hover:text-[#c4a87c] transition-colors duration-500">
-          iamaliar
-        </Link>
         <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
@@ -32,7 +30,7 @@ export function SiteHeader() {
               href={link.href}
               className={cn(
                 "font-mono-label link-accent transition-colors",
-                pathname?.startsWith(link.href) ? "text-[#e8e2d8]" : "text-[#6b6560] hover:text-[#e8e2d8]"
+                pathname === link.href ? "text-[#e8e2d8]" : "text-[#6b6560] hover:text-[#e8e2d8]"
               )}
             >
               {link.label}
