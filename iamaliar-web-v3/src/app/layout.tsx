@@ -1,36 +1,11 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Noto_Serif_JP, Noto_Sans_JP, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Loader } from "@/components/ui/loader";
 import { CursorFollower } from "@/components/ui/cursor";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
-  display: "swap",
-});
-const notoSerif = Noto_Serif_JP({
-  subsets: ["latin"],
-  weight: ["200", "300", "400"],
-  variable: "--font-noto-serif",
-  display: "swap",
-});
-const notoSans = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-noto-sans",
-  display: "swap",
-});
-const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-dm-mono",
-  display: "swap",
-});
+export const runtime = "edge";
 
 export const metadata: Metadata = {
   title: { default: "IAMALIAR — 服と作品のあいだ", template: "%s | IAMALIAR" },
@@ -39,7 +14,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja" className={`${cormorant.variable} ${notoSerif.variable} ${notoSans.variable} ${dmMono.variable}`}>
+    <html lang="ja">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@300;400&family=DM+Mono:wght@300;400&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <Loader />
         <CursorFollower />

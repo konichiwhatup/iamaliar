@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { FadeIn } from "@/components/ui/fade-in";
 
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "Contact — IAMALIAR",
   description: "作品についての問い合わせ・オーダーはLINEから。",

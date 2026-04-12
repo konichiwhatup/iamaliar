@@ -1,5 +1,7 @@
 "use client";
 
+export const runtime = "edge";
+
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { mockProducts } from "@/data/mock-products";
