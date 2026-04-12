@@ -118,15 +118,16 @@ export default function AboutPage() {
 
       {/* ─── BRAND STORY ─── */}
       <div className="container-site pt-32 pb-20">
-        <div className="mb-20 md:mb-28 max-w-2xl reveal">
+        <div className="mb-20 md:mb-28 mx-auto text-center reveal">
           <p className="text-xs tracking-[0.25em] uppercase text-[#555555] mb-4">Brand Story</p>
           <h2 style={{
             fontFamily: "'Noto Serif JP', serif",
             fontWeight: 200,
-            fontSize: "clamp(1.6rem, 3vw, 2.8rem)",
+            fontSize: "clamp(0.9rem, 1.8vw, 1.4rem)",
             lineHeight: 1.7,
             letterSpacing: "0.05em",
             color: "#e8e2d8",
+            whiteSpace: "nowrap",
           }}>
             「アートに食らった感情を服に変換する。」
           </h2>
