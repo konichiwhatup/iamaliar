@@ -1,0 +1,8 @@
+{
+  "name": "iamaliar-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "pages:build": "cd iamaliar-web-v3 && npm install && npm run pages:build"
+  }
+}
