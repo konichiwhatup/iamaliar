@@ -1,212 +1,54 @@
 import type { Product, Lookbook, JournalPost } from "@/types/product";
 
-export const mockProducts: Product[] = [
-  {
-    id: "p001",
-    slug: "reconstructed-levis-501-indigo",
-    status: "active",
-    title: "Reconstructed 501",
-    artworkTitle: "夜の海、沈みかけた船",
-    subtitle: "Levi's 501 再構築",
-    description:
-      "90年代のLevi's 501を素材として、ウエスト部分に刺し子技法を施した一点物。着ることへの問いを、布の上に刻む。",
-    story:
-      "フリーマーケットで出会ったこの一本は、誰かの記憶を宿していた。色褪せたインディゴ、擦り切れたポケット。それを壊すのではなく、新たな層を重ねることを選んだ。刺し子のステッチは、過去と現在が交わる縫い目だ。",
-    conceptNote:
-      "着るのか、飾るのか。その問いに答えを出さないこと自体が、このブランドの態度である。",
-    category: "pants",
-    tags: ["denim", "reconstructed", "sashiko", "indigo", "one-of-a-kind"],
-    baseMaterial: "Levi's 501 (1994年製)",
-    materialDetails: ["デニム 100%", "刺し子糸: 綿 100%"],
-    craftsmanship: ["刺し子", "ウエスト再構築", "裾カット"],
-    eraSource: "1990s",
-    sourceBrand: "Levi's",
-    price: 42000,
-    currency: "JPY",
-    sizes: [
-      {
-        label: "W30 L30",
-        measurements: { waist: 78, rise: 28, inseam: 76, thigh: 28, hem: 16 },
-        stock: 1,
-      },
-    ],
-    madeToOrder: false,
-    featuredImage: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=90",
-    gallery: [
-      "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=90",
-      "https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=800&q=90",
-      "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?w=800&q=90",
-      "https://images.unsplash.com/photo-1604176354204-9268737828e4?w=800&q=90",
-    ],
-    detailShots: [
-      {
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=90",
-        caption: "刺し子ステッチ詳細",
-        focusType: "stitch",
-      },
-      {
-        image: "https://images.unsplash.com/photo-1600185652960-a3e7fc3bff47?w=600&q=90",
-        caption: "素材感・インディゴの退色",
-        focusType: "fabric",
-      },
-    ],
-    publishedAt: "2025-03-01",
-    updatedAt: "2025-03-01",
-  },
-  {
-    id: "p002",
-    slug: "patchwork-jacket-nostalgia",
-    status: "active",
-    title: "Patchwork Field Jacket",
-    artworkTitle: "記憶の縫い合わせ",
-    subtitle: "パッチワーク再構築ジャケット",
-    description:
-      "3着の古着ジャケットを解体し、再縫製した一点物。異なる時代の布が、ひとつの服として存在する。",
-    story:
-      "解体するとき、服が持つ時間の密度を感じた。パッチワークは破壊ではなく、翻訳だ。",
-    category: "jacket",
-    tags: ["patchwork", "reconstructed", "jacket", "one-of-a-kind"],
-    baseMaterial: "複数古着ジャケット",
-    materialDetails: ["コットン 80%", "ポリエステル 20%"],
-    craftsmanship: ["解体縫製", "パッチワーク", "補強ステッチ"],
-    eraSource: "1980s-1990s",
-    price: 68000,
-    currency: "JPY",
-    sizes: [
-      {
-        label: "M相当",
-        measurements: { shoulder: 46, chest: 102, sleeve: 62, length: 72 },
-        stock: 1,
-      },
-    ],
-    featuredImage: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=90",
-    gallery: [
-      "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=90",
-      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=90",
-      "https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=800&q=90",
-    ],
-    detailShots: [
-      {
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=90",
-        caption: "パッチワーク縫製部",
-        focusType: "patchwork",
-      },
-    ],
-    publishedAt: "2025-02-15",
-    updatedAt: "2025-02-15",
-  },
-  {
-    id: "p003",
-    slug: "distressed-wide-denim-ocean",
-    status: "sold",
-    title: "Distressed Wide Denim",
-    artworkTitle: "海岸線の記憶",
-    subtitle: "ダメージ加工ワイドデニム",
-    description:
-      "波に洗われた石のように、時間をかけてダメージを入れた一点物。既に誰かの元へ旅立った。",
-    category: "pants",
-    tags: ["denim", "distressed", "wide", "sold"],
-    price: 38000,
-    currency: "JPY",
-    sizes: [
-      {
-        label: "W32 L28",
-        measurements: { waist: 82, rise: 30, inseam: 71, thigh: 32 },
-        stock: 0,
-      },
-    ],
-    featuredImage: "https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=800&q=90",
-    gallery: ["https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=800&q=90"],
-    detailShots: [],
-    publishedAt: "2025-01-10",
-    updatedAt: "2025-01-20",
-  },
-  {
-    id: "p004",
-    slug: "sashiko-shirt-reconstruction",
-    status: "active",
-    title: "Sashiko Work Shirt",
-    artworkTitle: "職人の手",
-    subtitle: "刺し子ワークシャツ",
-    description:
-      "古いワークシャツに日本伝統の刺し子を施した。作業着として生まれた服が、作品になる瞬間。",
-    story: "刺し子は修繕の技術から生まれた。壊れたものを直す行為が、装飾へと昇華された歴史。それをもう一度、現代の服に重ねる。",
-    category: "shirt",
-    tags: ["sashiko", "workwear", "japanese", "reconstructed"],
-    baseMaterial: "ビンテージワークシャツ",
-    materialDetails: ["コットン 100%"],
-    craftsmanship: ["刺し子", "補修"],
-    price: 52000,
-    currency: "JPY",
-    sizes: [
-      {
-        label: "L相当",
-        measurements: { shoulder: 48, chest: 108, sleeve: 64, length: 74 },
-        stock: 1,
-      },
-    ],
-    madeToOrder: true,
-    leadTime: "4〜6週間",
-    featuredImage: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=90",
-    gallery: [
-      "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=90",
-      "https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?w=800&q=90",
-    ],
-    detailShots: [
-      {
-        image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=90",
-        caption: "刺し子パターン",
-        focusType: "stitch",
-      },
-    ],
-    publishedAt: "2025-03-10",
-    updatedAt: "2025-03-10",
-  },
-  {
-    id: "p005",
-    slug: "indigo-reconstructed-trousers",
-    status: "made_to_order",
-    title: "Indigo Reconstructed Trousers",
-    artworkTitle: "藍染の哲学",
-    subtitle: "インディゴ再構築トラウザーズ",
-    description: "複数のデニム素材を組み合わせた再構築パンツ。インディゴの深みが服の思想を語る。",
-    category: "pants",
-    tags: ["indigo", "reconstructed", "trousers", "made-to-order"],
-    price: 56000,
-    currency: "JPY",
-    madeToOrder: true,
-    leadTime: "6〜8週間",
-    sizes: [
-      { label: "W28", measurements: { waist: 72 }, stock: 0 },
-      { label: "W30", measurements: { waist: 78 }, stock: 0 },
-      { label: "W32", measurements: { waist: 83 }, stock: 0 },
-    ],
-    featuredImage: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&q=90",
-    gallery: ["https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&q=90"],
-    detailShots: [],
-    publishedAt: "2025-03-12",
-    updatedAt: "2025-03-12",
-  },
-  {
-    id: "p006",
-    slug: "archive-oversized-coat",
-    status: "archived",
-    title: "Oversized Reconstruction Coat",
-    artworkTitle: "廃墟の美",
-    subtitle: "オーバーサイズ再構築コート",
-    description: "解体したコートを再構成。着用者の身体を包む空間ごと設計した一点物。（アーカイブ）",
-    category: "other",
-    tags: ["coat", "oversized", "archived"],
-    price: 85000,
-    currency: "JPY",
-    sizes: [{ label: "Free", measurements: {}, stock: 0 }],
-    featuredImage: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=800&q=90",
-    gallery: ["https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=800&q=90"],
-    detailShots: [],
-    publishedAt: "2024-11-01",
-    updatedAt: "2024-12-01",
-  },
-];
+// ── CMS移行用テンプレート ────────────────────────────────────────────
+// 以下のフォーマットで作品を追加してください。
+// CMS（Sanity等）導入後はこのファイルごと置き換える想定。
+//
+// {
+//   id: "p001",                          // ユニークID
+//   slug: "作品のURL slug",               // /collection/[slug] に使用
+//   status: "active",                    // "active" | "sold" | "made_to_order" | "archived"
+//   title: "作品タイトル (英)",
+//   artworkTitle: "作品タイトル (日)",
+//   subtitle: "サブタイトル",
+//   description: "説明文",
+//   story: "制作ストーリー",              // optional
+//   conceptNote: "コンセプトノート",      // optional
+//   category: "pants",                   // "pants" | "jacket" | "shirt" | "other"
+//   tags: ["tag1", "tag2"],
+//   baseMaterial: "素材ベース",
+//   materialDetails: ["コットン 100%"],
+//   craftsmanship: ["手法1", "手法2"],
+//   eraSource: "1990s",                  // optional
+//   sourceBrand: "Levi's",               // optional
+//   price: 42000,
+//   currency: "JPY",
+//   sizes: [
+//     {
+//       label: "W30 L30",
+//       measurements: { waist: 78, rise: 28, inseam: 76, thigh: 28, hem: 16 },
+//       stock: 1,
+//     },
+//   ],
+//   madeToOrder: false,
+//   leadTime: "4〜6週間",                // madeToOrder: true の場合
+//   featuredImage: "/images/p001/main.jpg",
+//   gallery: [
+//     "/images/p001/main.jpg",
+//     "/images/p001/02.jpg",
+//   ],
+//   detailShots: [
+//     {
+//       image: "/images/p001/detail-stitch.jpg",
+//       caption: "キャプション",
+//       focusType: "stitch",             // "stitch" | "fabric" | "patchwork" | etc.
+//     },
+//   ],
+//   publishedAt: "2025-03-01",
+//   updatedAt: "2025-03-01",
+// }
+
+export const mockProducts: Product[] = [];
 
 export const mockLookbooks: Lookbook[] = [
   {

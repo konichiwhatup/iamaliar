@@ -71,49 +71,62 @@ export default function CollectionPage() {
         </FadeIn>
 
         {/* Gallery */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#1e1a17]">
-          {filtered.map((product, i) => (
-            <FadeIn key={product.id} delay={i * 0.04}>
-              <div
-                className="relative bg-[#0a0908] overflow-hidden cursor-default"
-                style={{ aspectRatio: "3/4" }}
-                onMouseEnter={() => setHovered(product.id)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <Image
-                  src={
-                    hovered === product.id && product.gallery[1]
-                      ? product.gallery[1]
-                      : product.featuredImage
-                  }
-                  alt={product.artworkTitle ?? product.title}
-                  fill
-                  className="object-cover transition-all duration-700"
-                  style={{
-                    opacity: hovered === product.id ? 0.85 : 0.65,
-                    transform: hovered === product.id ? "scale(1.03)" : "scale(1)",
-                  }}
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,9,8,0.85) 0%, transparent 55%)" }} />
+        {filtered.length === 0 ? (
+          <FadeIn delay={0.15}>
+            <div className="flex flex-col items-center justify-center py-32 text-center">
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: "#333333", textTransform: "uppercase", marginBottom: "1.5rem" }}>
+                — coming soon —
+              </p>
+              <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.1rem", letterSpacing: "0.1em", color: "#555555", lineHeight: 2 }}>
+                作品を準備中です
+              </p>
+            </div>
+          </FadeIn>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#1e1a17]">
+            {filtered.map((product, i) => (
+              <FadeIn key={product.id} delay={i * 0.04}>
+                <div
+                  className="relative bg-[#0a0908] overflow-hidden cursor-default"
+                  style={{ aspectRatio: "3/4" }}
+                  onMouseEnter={() => setHovered(product.id)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  <Image
+                    src={
+                      hovered === product.id && product.gallery[1]
+                        ? product.gallery[1]
+                        : product.featuredImage
+                    }
+                    alt={product.artworkTitle ?? product.title}
+                    fill
+                    className="object-cover transition-all duration-700"
+                    style={{
+                      opacity: hovered === product.id ? 0.85 : 0.65,
+                      transform: hovered === product.id ? "scale(1.03)" : "scale(1)",
+                    }}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,9,8,0.85) 0%, transparent 55%)" }} />
 
-                <div className="absolute bottom-0 left-0 p-5 md:p-7">
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.3em", color: "#6b6560", marginBottom: "0.5rem" }}>
-                    {String(i + 1).padStart(3, "0")}
-                  </p>
-                  {product.artworkTitle && (
-                    <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.9rem", letterSpacing: "0.08em", color: "#e8e2d8", lineHeight: 1.4 }}>
-                      {product.artworkTitle}
+                  <div className="absolute bottom-0 left-0 p-5 md:p-7">
+                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.3em", color: "#6b6560", marginBottom: "0.5rem" }}>
+                      {String(i + 1).padStart(3, "0")}
                     </p>
-                  )}
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.15em", color: "#6b6560", textTransform: "uppercase", marginTop: "0.3rem" }}>
-                    {product.title}
-                  </p>
+                    {product.artworkTitle && (
+                      <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.9rem", letterSpacing: "0.08em", color: "#e8e2d8", lineHeight: 1.4 }}>
+                        {product.artworkTitle}
+                      </p>
+                    )}
+                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.15em", color: "#6b6560", textTransform: "uppercase", marginTop: "0.3rem" }}>
+                      {product.title}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+              </FadeIn>
+            ))}
+          </div>
+        )}
 
         {/* LINE CTA */}
         <FadeIn delay={0.2}>
