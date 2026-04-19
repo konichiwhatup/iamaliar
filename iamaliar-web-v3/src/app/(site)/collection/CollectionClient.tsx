@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Product, ProductCategory } from "@/types/product";
 import { FadeIn } from "@/components/ui/fade-in";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/language-context";
 
 const LINE_URL = "https://line.me/ti/p/@857usrfa";
 
@@ -20,6 +21,7 @@ const categoryLabels: Record<ProductCategory | "all", string> = {
 export default function CollectionClient({ products }: { products: Product[] }) {
   const [category, setCategory] = useState<ProductCategory | "all">("all");
   const [hovered, setHovered] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   const filtered = useMemo(() => {
     if (category === "all") return products;
@@ -40,7 +42,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
               Collection
             </h1>
             <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.85rem", color: "#888888", marginTop: "1rem", lineHeight: 1.8 }}>
-              量産された服に新しい物語を与えた、一点物の作品たち。
+              {t.collection.subtitle}
             </p>
           </div>
         </FadeIn>
@@ -76,7 +78,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
                 — coming soon —
               </p>
               <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.1rem", letterSpacing: "0.1em", color: "#555555", lineHeight: 2 }}>
-                作品を準備中です
+                {t.collection.comingSoonText}
               </p>
             </div>
           </FadeIn>
@@ -134,7 +136,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
         <FadeIn delay={0.2}>
           <div className="mt-20 pt-12 border-t border-[#1C1C1C] text-center">
             <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.2rem", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "0.75rem" }}>
-              作品についての問い合わせはLINEから
+              {t.collection.ctaText}
             </p>
             <a
               href={LINE_URL}
@@ -142,7 +144,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
               rel="noopener noreferrer"
               className="btn-outline font-mono-label px-10 py-4 inline-block mt-4"
             >
-              LINE で問い合わせる
+              {t.collection.ctaButton}
             </a>
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: "#555555", marginTop: "1rem" }}>
               @857usrfa

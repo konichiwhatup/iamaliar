@@ -5,8 +5,19 @@ export const runtime = "edge";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/context/language-context";
 
 const LINE_URL = "https://line.me/ti/p/@857usrfa";
+
+const sectionImages = [
+  "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90",
+  "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=90",
+  "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=90",
+  "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=900&q=90",
+  "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=90",
+];
+
+const imageRights = [true, false, true, false, true];
 
 function useReveal() {
   useEffect(() => {
@@ -37,52 +48,11 @@ function useHeroParallax() {
   return ref;
 }
 
-const sections = [
-  {
-    number: "01",
-    heading: "IAMALIARとは",
-    body: `"I AM A LIAR"——「私は嘘つきです」\n\nその一言から、全ての矛盾は始まる。IAMALIARは、そんな矛盾を洋服で表現します。`,
-    image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90",
-    imageAlt: "藍染の布",
-    imageRight: true,
-  },
-  {
-    number: "02",
-    heading: "「衝撃を、纏う。」",
-    body: `アートに突き動かされた衝動を、服として再構築する。\n\nあの作品を観た時の、あの衝撃。身体に残ったその感情の欠片を繋ぎ合わせ、服として具現化する。`,
-    image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=90",
-    imageAlt: "日本の田舎風景",
-    imageRight: false,
-  },
-  {
-    number: "03",
-    heading: "額縁に飾れる服作り",
-    body: `壁に掛ければ芸術になり、身に纏えば日常になる。\n\n飾るためなのか、それとも着るためのものなのか、その解釈はあなたに委ねます。`,
-    image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=90",
-    imageAlt: "美術館の額縁",
-    imageRight: true,
-  },
-  {
-    number: "04",
-    heading: "既製品を物語のある一点ものに変換する",
-    body: `新しい生命を吹き込む。\n\n既製品として生まれ、誰かに消費され、いつか忘れ去られたもの。いつしか呼吸を止めた「かつての服」。私たちはその静止した時間に新しい物語を書き加える。`,
-    image: "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=900&q=90",
-    imageAlt: "手仕事をする職人",
-    imageRight: false,
-  },
-  {
-    number: "05",
-    heading: "「刺し子」",
-    body: `同じものは、二度と縫えない。\n\nかつて、大切な布を長く、強く使うために生まれた「刺し子」。私たちは、その伝統を受け継ぎ、ひと針ひと針に想いを込めて縫い上げます。均一ではない、あなただけの一点もの。`,
-    image: "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=90",
-    imageAlt: "刺し子の生地",
-    imageRight: true,
-  },
-];
-
 export default function AboutPage() {
   useReveal();
   const heroRef = useHeroParallax();
+  const { t } = useLanguage();
+  const { sections } = t.home;
 
   return (
     <>
@@ -115,7 +85,7 @@ export default function AboutPage() {
             marginTop: "2rem",
             animation: "fadeUp 1.8s cubic-bezier(0.22,1,0.36,1) 2.6s both",
           }}>
-            解釈はあなたが決めてください。
+            {t.home.heroTagline}
           </p>
           <div style={{
             width: 1, height: 80,
@@ -135,7 +105,7 @@ export default function AboutPage() {
       {/* ─── BRAND STORY ─── */}
       <div className="container-site pt-32 pb-20">
         <div className="mb-20 md:mb-28 mx-auto text-center reveal">
-          <p className="text-xs tracking-[0.25em] uppercase text-[#555555] mb-4">Brand Story</p>
+          <p className="text-xs tracking-[0.25em] uppercase text-[#555555] mb-4">{t.home.brandStoryLabel}</p>
           <h2 style={{
             fontFamily: "'Noto Serif JP', serif",
             fontWeight: 200,
@@ -143,21 +113,20 @@ export default function AboutPage() {
             lineHeight: 1.7,
             letterSpacing: "0.05em",
             color: "#e8e2d8",
-            whiteSpace: "nowrap",
           }}>
-            「アートに食らった感情を服に変換する。」
+            {t.home.brandStoryHeading}
           </h2>
         </div>
 
         <div className="space-y-20 md:space-y-32">
           {sections.map((section, i) => (
-            <div key={section.number}>
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-0 reveal ${section.imageRight ? "" : "md:[&>*:first-child]:order-2"}`}>
+            <div key={i}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-0 reveal ${imageRights[i] ? "" : "md:[&>*:first-child]:order-2"}`}>
 
                 {/* Text side */}
-                <div className={`flex flex-col justify-center py-8 ${section.imageRight ? "md:pr-16" : "md:pl-16 md:order-2"}`}>
+                <div className={`flex flex-col justify-center py-8 ${imageRights[i] ? "md:pr-16" : "md:pl-16 md:order-2"}`}>
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.35em", color: "#2e2e2e", display: "block", marginBottom: "1.5rem" }}>
-                    {section.number}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.3rem, 2vw, 1.8rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
                     {section.heading}
@@ -179,16 +148,15 @@ export default function AboutPage() {
                 </div>
 
                 {/* Image side */}
-                <div className={`relative overflow-hidden ${section.imageRight ? "" : "md:order-1"}`} style={{ aspectRatio: "4/5" }}>
+                <div className={`relative overflow-hidden ${imageRights[i] ? "" : "md:order-1"}`} style={{ aspectRatio: "4/5" }}>
                   <Image
-                    src={section.image}
+                    src={sectionImages[i]}
                     alt={section.imageAlt}
                     fill
                     className="object-cover"
                     style={{ opacity: 0.55, filter: "sepia(0.2) contrast(1.05)" }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  {/* subtle vignette */}
                   <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(10,9,8,0.3) 0%, transparent 60%, rgba(10,9,8,0.4) 100%)" }} />
                 </div>
 
@@ -206,7 +174,7 @@ export default function AboutPage() {
             href="/collection"
             className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase bg-[#E8E5DF] text-[#080808] px-8 py-4 hover:bg-[#C8B490] transition-colors"
           >
-            Collection を見る
+            {t.home.ctaCollection}
           </Link>
           <a
             href={LINE_URL}
@@ -214,7 +182,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase border border-[#1C1C1C] text-[#E8E5DF] px-8 py-4 hover:border-[#c4a87c] hover:text-[#c4a87c] transition-colors"
           >
-            LINE で問い合わせる
+            {t.home.ctaLine}
           </a>
         </div>
       </div>

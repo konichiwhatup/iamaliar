@@ -4,19 +4,21 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/collection", label: "Collection" },
-  { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/context/language-context";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { locale, t, toggle } = useLanguage();
 
   useEffect(() => { setMenuOpen(false); }, [pathname]);
+
+  const navLinks = [
+    { href: "/", label: t.nav.home },
+    { href: "/collection", label: t.nav.collection },
+    { href: "/journal", label: t.nav.journal },
+    { href: "/contact", label: t.nav.contact },
+  ];
 
   return (
     <>
@@ -38,6 +40,18 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        {/* Language toggle — desktop */}
+        <button
+          onClick={toggle}
+          className="hidden md:flex absolute right-12 items-center gap-1 font-mono-label text-[#6b6560] hover:text-[#e8e2d8] transition-colors"
+          aria-label="Toggle language"
+        >
+          <span className={locale === "ja" ? "text-[#e8e2d8]" : ""}>JA</span>
+          <span className="text-[#2e2e2e]">/</span>
+          <span className={locale === "en" ? "text-[#e8e2d8]" : ""}>EN</span>
+        </button>
+
         <button className="md:hidden text-[#6b6560] hover:text-[#e8e2d8] transition-colors" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
         </button>
@@ -55,6 +69,17 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        {/* Language toggle — mobile */}
+        <button
+          onClick={toggle}
+          className="mt-16 flex items-center gap-2 font-mono-label text-[#6b6560] hover:text-[#e8e2d8] transition-colors"
+          aria-label="Toggle language"
+        >
+          <span className={locale === "ja" ? "text-[#e8e2d8]" : ""}>JA</span>
+          <span className="text-[#2e2e2e]">/</span>
+          <span className={locale === "en" ? "text-[#e8e2d8]" : ""}>EN</span>
+        </button>
       </div>
     </>
   );
