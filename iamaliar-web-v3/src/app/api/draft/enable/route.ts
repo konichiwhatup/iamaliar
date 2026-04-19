@@ -1,3 +1,5 @@
+export const runtime = 'edge'
+
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
@@ -8,7 +10,7 @@ export async function GET(request: NextRequest) {
   const slug = searchParams.get('slug') ?? '/'
 
   if (secret !== process.env.SANITY_PREVIEW_SECRET) {
-    return new Response('Invalid secret', { status: 401 })
+    return new Response(`Invalid secret. Got: "${secret}", Expected: "${process.env.SANITY_PREVIEW_SECRET}"`, { status: 401 })
   }
 
   const dm = await draftMode()
