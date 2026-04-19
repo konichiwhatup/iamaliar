@@ -1,0 +1,109 @@
+import { client } from './sanity'
+import type { Product, JournalPost } from '@/types/product'
+
+// ── 型変換ヘルパー ────────────────────────────────────────────
+function toImageUrl(image: any): string {
+  if (!image?.asset?._ref) return ''
+  const ref = image.asset._ref as string
+  // ref format: image-{id}-{width}x{height}-{format}
+  const [, id, dimensions, format] = ref.split('-')
+  return `https://cdn.sanity.io/images/22x23c52/productionenabled/${id}-${dimensions}.${format}`
+}
+
+function toProduct(doc: any): Product {
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? '',
+    status: doc.status,
+    title: doc.title,
+    artworkTitle: doc.artworkTitle,
+    subtitle: doc.subtitle,
+    description: doc.description ?? '',
+    story: doc.story,
+    conceptNote: doc.conceptNote,
+    category: doc.category,
+    tags: doc.tags ?? [],
+    baseMaterial: doc.baseMaterial,
+    materialDetails: doc.materialDetails ?? [],
+    craftsmanship: doc.craftsmanship ?? [],
+    eraSource: doc.eraSource,
+    sourceBrand: doc.sourceBrand,
+    price: doc.price ?? 0,
+    compareAtPrice: doc.compareAtPrice,
+    currency: 'JPY',
+    sizes: (doc.sizes ?? []).map((s: any) => ({
+      label: s.label,
+      measurements: s.measurements ?? {},
+      stock: s.stock ?? 0,
+      sku: s.sku,
+    })),
+    availabilityText: doc.availabilityText,
+    madeToOrder: doc.madeToOrder ?? false,
+    leadTime: doc.leadTime,
+    featuredImage: toImageUrl(doc.featuredImage),
+    gallery: (doc.gallery ?? []).map(toImageUrl),
+    detailShots: (doc.detailShots ?? []).map((d: any) => ({
+      image: toImageUrl(d.image),
+      caption: d.caption,
+      focusType: d.focusType,
+    })),
+    publishedAt: doc.publishedAt ?? doc._createdAt,
+    updatedAt: doc._updatedAt,
+  }
+}
+
+
+function toJournal(doc: any): JournalPost {
+  // Portable Text → plain text 変換 (シンプル版)
+  const bodyText = (doc.body ?? [])
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => b.children?.map((c: any) => c.text).join('') ?? '')
+    .join('\n\n')
+
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? '',
+    title: doc.title,
+    excerpt: doc.excerpt,
+    category: doc.category,
+    tags: doc.tags ?? [],
+    coverImage: doc.coverImage ? toImageUrl(doc.coverImage) : undefined,
+    body: bodyText,
+    relatedProducts: (doc.relatedProducts ?? []).map((p: any) => p._id),
+    relatedLookbooks: (doc.relatedLookbooks ?? []).map((l: any) => l._id),
+    author: doc.author,
+    publishedAt: doc.publishedAt ?? doc._createdAt,
+    updatedAt: doc._updatedAt,
+  }
+}
+
+// ── Products ────────────────────────────────────────────────
+export async function getProducts(): Promise<Product[]> {
+  const docs = await client.fetch(`*[_type == "product"] | order(publishedAt desc)`)
+  return docs.map(toProduct)
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const doc = await client.fetch(`*[_type == "product" && slug.current == $slug][0]`, { slug })
+  return doc ? toProduct(doc) : undefined
+}
+
+export async function getRelatedProducts(product: Product): Promise<Product[]> {
+  const docs = await client.fetch(
+    `*[_type == "product" && category == $category && _id != $id] | order(publishedAt desc)[0...3]`,
+    { category: product.category, id: product.id }
+  )
+  return docs.map(toProduct)
+}
+
+
+// ── Journals ────────────────────────────────────────────────
+export async function getJournals(): Promise<JournalPost[]> {
+  const docs = await client.fetch(`*[_type == "journal"] | order(publishedAt desc)`)
+  return docs.map(toJournal)
+}
+
+export async function getJournalBySlug(slug: string): Promise<JournalPost | undefined> {
+  const doc = await client.fetch(`*[_type == "journal" && slug.current == $slug][0]`, { slug })
+  return doc ? toJournal(doc) : undefined
+}
