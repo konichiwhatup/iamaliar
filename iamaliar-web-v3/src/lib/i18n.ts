@@ -20,7 +20,7 @@ export const translations = {
       brandStoryHeading: "「アートに食らった感情を服に変換する。」",
       sections: [
         {
-          heading: "I AM A LIAR"——「私は嘘つきです」",
+          heading: `"I AM A LIAR"——「私は嘘つきです」`,
           body: `"「古くて、新しい、私」`,
           imageAlt: "藍染の布",
         },
