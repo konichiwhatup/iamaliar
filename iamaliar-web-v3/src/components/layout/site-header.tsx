@@ -49,9 +49,6 @@ export function SiteHeader() {
         menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       )}>
         <nav className="flex flex-col items-center gap-12">
-          <Link href="/" className="font-serif text-3xl font-light tracking-wider text-[#e8e2d8] hover:text-[#c4a87c] transition-colors duration-300">
-            About
-          </Link>
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="font-serif text-3xl font-light tracking-wider text-[#e8e2d8] hover:text-[#c4a87c] transition-colors duration-300">
               {link.label}
