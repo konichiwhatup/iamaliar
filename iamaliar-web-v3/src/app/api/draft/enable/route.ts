@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const secret = searchParams.get('secret')
   const slug = searchParams.get('slug') ?? '/'
 
-  const previewSecret = process.env.SANITY_PREVIEW_SECRET
+  const previewSecret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET
 
   if (secret !== previewSecret) {
     return new Response('Invalid secret', { status: 401 })
