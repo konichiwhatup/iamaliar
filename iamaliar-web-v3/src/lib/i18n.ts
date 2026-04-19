@@ -21,7 +21,7 @@ export const translations = {
       sections: [
         {
           heading: `"I AM A LIAR"——「私は嘘つきです」`,
-          body: "",
+          body: `その一言から、全ての矛盾は始まる。`,
           imageAlt: "藍染の布",
         },
         {
