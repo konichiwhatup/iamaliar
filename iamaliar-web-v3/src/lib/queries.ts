@@ -75,35 +75,55 @@ function toJournal(doc: any): JournalPost {
 
 // ── Products ────────────────────────────────────────────────
 export async function getProducts(): Promise<Product[]> {
-  const c = await getClient()
-  const docs = await c.fetch(`*[_type == "product"] | order(publishedAt desc)`)
-  return docs.map(toProduct)
+  try {
+    const c = await getClient()
+    const docs = await c.fetch(`*[_type == "product"] | order(publishedAt desc)`)
+    return docs.map(toProduct)
+  } catch {
+    return []
+  }
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const c = await getClient()
-  const doc = await c.fetch(`*[_type == "product" && slug.current == $slug][0]`, { slug })
-  return doc ? toProduct(doc) : undefined
+  try {
+    const c = await getClient()
+    const doc = await c.fetch(`*[_type == "product" && slug.current == $slug][0]`, { slug })
+    return doc ? toProduct(doc) : undefined
+  } catch {
+    return undefined
+  }
 }
 
 export async function getRelatedProducts(product: Product): Promise<Product[]> {
-  const c = await getClient()
-  const docs = await c.fetch(
-    `*[_type == "product" && category == $category && _id != $id] | order(publishedAt desc)[0...3]`,
-    { category: product.category, id: product.id }
-  )
-  return docs.map(toProduct)
+  try {
+    const c = await getClient()
+    const docs = await c.fetch(
+      `*[_type == "product" && category == $category && _id != $id] | order(publishedAt desc)[0...3]`,
+      { category: product.category, id: product.id }
+    )
+    return docs.map(toProduct)
+  } catch {
+    return []
+  }
 }
 
 // ── Journals ────────────────────────────────────────────────
 export async function getJournals(): Promise<JournalPost[]> {
-  const c = await getClient()
-  const docs = await c.fetch(`*[_type == "journal"] | order(publishedAt desc)`)
-  return docs.map(toJournal)
+  try {
+    const c = await getClient()
+    const docs = await c.fetch(`*[_type == "journal"] | order(publishedAt desc)`)
+    return docs.map(toJournal)
+  } catch {
+    return []
+  }
 }
 
 export async function getJournalBySlug(slug: string): Promise<JournalPost | undefined> {
-  const c = await getClient()
-  const doc = await c.fetch(`*[_type == "journal" && slug.current == $slug][0]`, { slug })
-  return doc ? toJournal(doc) : undefined
+  try {
+    const c = await getClient()
+    const doc = await c.fetch(`*[_type == "journal" && slug.current == $slug][0]`, { slug })
+    return doc ? toJournal(doc) : undefined
+  } catch {
+    return undefined
+  }
 }

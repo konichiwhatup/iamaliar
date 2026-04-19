@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import { getProducts } from "@/lib/queries";
 import CollectionClient from "./CollectionClient";
 
