@@ -1,13 +1,21 @@
 import { createClient } from '@sanity/client'
-import { cookies } from 'next/headers'
+
+const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
+const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET!
 
 export async function getClient() {
-  const cookieStore = await cookies()
-  const isPreview = cookieStore.get('preview-mode')?.value === 'true'
+  let isPreview = false
+  try {
+    const { cookies } = await import('next/headers')
+    const cookieStore = await cookies()
+    isPreview = cookieStore.get('preview-mode')?.value === 'true'
+  } catch {
+    // edge runtime で cookies が使えない場合は published にフォールバック
+  }
 
   return createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'placeholder',
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+    projectId: PROJECT_ID,
+    dataset: DATASET,
     apiVersion: '2026-04-19',
     useCdn: !isPreview,
     token: isPreview ? process.env.SANITY_API_READ_TOKEN : undefined,
