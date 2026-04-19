@@ -17,11 +17,11 @@ export const translations = {
     home: {
       heroTagline: "解釈はあなたが決めてください。",
       brandStoryLabel: "Brand Story",
-      brandStoryHeading: "「アートに食らった感情を服に変換する。」",
+      brandStoryHeading: "「古くて、新しい、私」",
       sections: [
         {
           heading: `"I AM A LIAR"——「私は嘘つきです」`,
-          body: `"「古くて、新しい、私」`,
+          body: "",
           imageAlt: "藍染の布",
         },
         {
@@ -96,7 +96,7 @@ export const translations = {
       sections: [
         {
           heading: "What is IAMALIAR",
-          body: `"I AM A LIAR" — a single phrase where all contradictions begin.\n\nIAMALIAR expresses those contradictions through clothing.`,
+          body: "",
           imageAlt: "Indigo-dyed fabric",
         },
         {

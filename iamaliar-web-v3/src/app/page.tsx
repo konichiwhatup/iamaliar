@@ -131,7 +131,7 @@ export default function AboutPage() {
                   <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.3rem, 2vw, 1.8rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
                     {section.heading}
                   </h3>
-                  <div className="space-y-4">
+                  {section.body && <div className="space-y-4">
                     {section.body.split("\n\n").map((para, j) => (
                       <p key={j} style={{
                         fontFamily: "'Noto Serif JP', serif",
@@ -144,7 +144,7 @@ export default function AboutPage() {
                         {para}
                       </p>
                     ))}
-                  </div>
+                  </div>}
                 </div>
 
                 {/* Image side */}
