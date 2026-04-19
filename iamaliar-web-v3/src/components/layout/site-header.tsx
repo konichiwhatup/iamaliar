@@ -44,7 +44,7 @@ export function SiteHeader() {
         {/* Language toggle — desktop */}
         <button
           onClick={toggle}
-          className="hidden md:flex absolute right-12 items-center gap-1 font-mono-label text-[#6b6560] hover:text-[#e8e2d8] transition-colors"
+          className="hidden md:flex absolute right-12 items-center gap-1 font-mono-label text-xs tracking-[0.15em] text-[#6b6560] hover:text-[#e8e2d8] transition-colors"
           aria-label="Toggle language"
         >
           <span className={locale === "ja" ? "text-[#e8e2d8]" : ""}>JA</span>
