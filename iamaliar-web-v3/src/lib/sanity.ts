@@ -1,13 +1,6 @@
 import { createClient } from '@sanity/client'
 import { cookies } from 'next/headers'
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'placeholder',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2026-04-19',
-  useCdn: true,
-})
-
 export async function getClient() {
   const cookieStore = await cookies()
   const isPreview = cookieStore.get('preview-mode')?.value === 'true'
