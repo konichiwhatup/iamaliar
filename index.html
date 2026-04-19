@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>between — 現実と虚構のあいだ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400;500;600&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+  --bg: #0a0908;
+  --fg: #e8e2d8;
+  --accent: #c4a87c;
+  --muted: #6b6560;
+  --warm: #2a2320;
+  --ocean: #3a4a5c;
+  --sand: #d4c5a9;
+  --frame: #8b7d6b;
+  --serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--bg);
+}
+
+body {
+  font-family: var(--serif);
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ─── LOADING ─── */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-line {
+  width: 120px;
+  height: 1px;
+  background: var(--muted);
+  position: relative;
+  overflow: hidden;
+}
+.loader-line::after {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  animation: load 2s ease-in-out forwards;
+}
+@keyframes load {
+  to { left: 0; }
+}
+.loader-text {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: var(--fg);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(58, 74, 92, 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196, 168, 124, 0.08), transparent),
+    var(--bg);
+}
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+.hero-title {
+  font-size: clamp(3rem, 10vw, 9rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 0.9;
+  opacity: 0;
+  animation: fadeUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) 2.2s forwards;
+}
+.hero-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(0.75rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.5em;
+  color: var(--muted);
+  margin-top: 2rem;
+  opacity: 0;
+  animation: fadeUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) 2.6s forwards;
+}
+.hero-line {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  margin: 3rem auto 0;
+  opacity: 0;
+  animation: fadeUp 1.8s cubic-bezier(0.22, 1, 0.36, 1) 3s forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── FLOATING FRAME ─── */
+.floating-frame {
+  position: absolute;
+  border: 1px solid rgba(196, 168, 124, 0.15);
+  pointer-events: none;
+}
+.frame-1 {
+  width: 200px; height: 280px;
+  top: 15%; left: 8%;
+  animation: floatA 12s ease-in-out infinite;
+  opacity: 0;
+  animation: floatA 12s ease-in-out infinite, fadeUp 2s 3.5s forwards;
+}
+.frame-2 {
+  width: 160px; height: 220px;
+  bottom: 12%; right: 10%;
+  animation: floatB 14s ease-in-out infinite;
+  opacity: 0;
+  animation: floatB 14s ease-in-out infinite, fadeUp 2s 3.8s forwards;
+}
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50% { transform: translateY(-15px) rotate(-1.5deg); }
+}
+
+/* ─── SECTION: PHILOSOPHY ─── */
+.section {
+  padding: 10rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.section-label::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--muted);
+}
+
+/* ─── PHILOSOPHY ─── */
+.philosophy {
+  position: relative;
+}
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.philosophy-statement {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  line-height: 2;
+  letter-spacing: 0.05em;
+  color: var(--fg);
+}
+.philosophy-statement em {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 300;
+}
+.philosophy-aside {
+  padding-top: 2rem;
+}
+.philosophy-aside p {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 2.2;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+.philosophy-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 3rem;
+}
+.keyword {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(196, 168, 124, 0.2);
+  color: var(--sand);
+  transition: all 0.4s ease;
+}
+.keyword:hover {
+  background: rgba(196, 168, 124, 0.08);
+  border-color: var(--accent);
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--muted), transparent);
+  opacity: 0.3;
+}
+
+/* ─── WORKS / COLLECTION ─── */
+.works {
+  padding: 10rem 0;
+  overflow: hidden;
+}
+.works-header {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  margin-bottom: 6rem;
+}
+.works-title {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+.works-title span {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.5em;
+  letter-spacing: 0.2em;
+  margin-top: 0.5em;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+.gallery-item {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--warm);
+}
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(196, 168, 124, 0);
+  z-index: 3;
+  transition: border-color 0.6s ease;
+  pointer-events: none;
+}
+.gallery-item:hover::before {
+  border-color: rgba(196, 168, 124, 0.3);
+}
+.gallery-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+.gallery-frame {
+  width: 70%;
+  aspect-ratio: 3/4;
+  border: 1px solid rgba(196, 168, 124, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+.gallery-item:hover .gallery-frame {
+  border-color: var(--accent);
+  transform: scale(1.02);
+}
+.gallery-frame-inner {
+  padding: 1.5rem;
+  text-align: center;
+}
+.gallery-num {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.gallery-name {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+.gallery-desc {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.gallery-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: -1;
+}
+.gallery-item:hover .gallery-bg {
+  opacity: 0.08;
+}
+.gallery-bg-pattern {
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(196, 168, 124, 0.3) 10px,
+      rgba(196, 168, 124, 0.3) 11px
+    );
+}
+
+.gallery-item.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+.gallery-item.featured .gallery-frame {
+  width: 50%;
+}
+
+/* ─── STORY SECTION ─── */
+.story {
+  position: relative;
+}
+.story-content {
+  max-width: 700px;
+}
+.story-quote {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 2.4;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1px solid var(--accent);
+}
+.story-quote + .story-quote {
+  margin-top: 3rem;
+}
+.story-credit {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-top: 2rem;
+  padding-left: 2rem;
+  text-transform: uppercase;
+}
+
+/* ─── DENIM MANIFESTO ─── */
+.manifesto {
+  background: var(--warm);
+  padding: 10rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.manifesto::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58, 74, 92, 0.1), transparent 70%);
+  pointer-events: none;
+}
+.manifesto-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: center;
+}
+.manifesto-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.manifesto-frame {
+  width: 280px;
+  height: 380px;
+  border: 1px solid rgba(196, 168, 124, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.manifesto-frame::before {
+  content: '額';
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: 4rem;
+  color: rgba(196, 168, 124, 0.08);
+  position: absolute;
+}
+.manifesto-frame-label {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.manifesto-shadow {
+  position: absolute;
+  width: 280px;
+  height: 380px;
+  border: 1px solid rgba(196, 168, 124, 0.08);
+  top: 20px;
+  left: 20px;
+}
+.manifesto-text h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  margin-bottom: 3rem;
+}
+.manifesto-text h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.manifesto-text p {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 2.4;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ─── ETHOS CARDS ─── */
+.ethos {
+  padding: 10rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.ethos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4rem;
+}
+.ethos-card {
+  padding: 3rem 2.5rem;
+  border: 1px solid rgba(196, 168, 124, 0.08);
+  transition: all 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+.ethos-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ethos-card:hover::before {
+  width: 100%;
+}
+.ethos-card:hover {
+  background: rgba(196, 168, 124, 0.03);
+}
+.ethos-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: 1.8rem;
+  letter-spacing: 0.15em;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+.ethos-en {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+.ethos-desc {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 300;
+  font-size: 0.78rem;
+  line-height: 2.2;
+  color: var(--muted);
+}
+
+/* ─── CONTACT / FOOTER ─── */
+.footer-section {
+  padding: 10rem 3rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-cta {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 200;
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+.footer-btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  padding: 1rem 3rem;
+  border: 1px solid var(--muted);
+  transition: all 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+.footer-btn::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+.footer-btn:hover {
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.footer-btn:hover::before {
+  height: 100%;
+}
+
+.footer-bottom {
+  margin-top: 10rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(107, 101, 96, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+.footer-social {
+  display: flex;
+  gap: 2rem;
+}
+.footer-social a {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.footer-social a:hover {
+  color: var(--accent);
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+
+/* ─── CURSOR FOLLOWER ─── */
+.cursor-follow {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.cursor-follow.active {
+  opacity: 1;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  nav { padding: 1.5rem 2rem; }
+  .section { padding: 6rem 2rem; }
+  .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .manifesto { padding: 6rem 2rem; }
+  .manifesto-inner { grid-template-columns: 1fr; gap: 4rem; }
+  .manifesto-visual { display: none; }
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .gallery-item.featured { grid-column: span 2; grid-row: span 1; aspect-ratio: 16/9; }
+  .ethos-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  .nav-links a { font-size: 0.5rem; }
+  .section { padding: 5rem 1.5rem; }
+  .hero-title { letter-spacing: 0.04em; }
+  .gallery { grid-template-columns: 1fr; padding: 0 1.5rem; }
+  .gallery-item.featured { grid-column: span 1; }
+  .footer-bottom { flex-direction: column; gap: 1.5rem; }
+  .floating-frame { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-text">between — loading</div>
+  <div class="loader-line"></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor-follow" id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">between</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="floating-frame frame-1"></div>
+  <div class="floating-frame frame-2"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">between</h1>
+    <p class="hero-sub">現実と虚構のあいだ</p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section philosophy" id="philosophy">
+  <div class="section-label reveal">Philosophy</div>
+  <div class="philosophy-grid">
+    <div class="philosophy-statement reveal reveal-delay-1">
+      既製品を<em>物語のある一点物</em>に変換する。<br><br>
+      日々の生活の中で心を動かされたもの、<br>
+      その時の<em>感情</em>を、<br>
+      服という形で再構築している。
+    </div>
+    <div class="philosophy-aside reveal reveal-delay-2">
+      <p>
+        世の中にありふれた完成されたものを、そのまま受け入れることに少し違和感がある。
+        量産されたデニムはデニムとしての人生を歩いていく——そのデニムに、新たな物語を投影させたい。
+      </p>
+      <p>
+        たとえでいうとトイ・ストーリーのように、デニム一本一本に感情が宿っていて、
+        そのデニムたちに新しいストーリー、新しい人生を歩ませる。
+      </p>
+      <div class="philosophy-keywords">
+        <span class="keyword">シュルレアリスム</span>
+        <span class="keyword">海沿い</span>
+        <span class="keyword">ノスタルジック</span>
+        <span class="keyword">エモーショナル</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- WORKS -->
+<section class="works" id="works">
+  <div class="works-header">
+    <div class="section-label reveal">Collection</div>
+    <h2 class="works-title reveal reveal-delay-1">
+      額縁に飾れる服
+      <span>clothes you can frame</span>
+    </h2>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item featured reveal">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">001</div>
+            <div class="gallery-name">残像 — Afterimage</div>
+            <div class="gallery-desc">Reconstructed Denim / Sashiko</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">002</div>
+            <div class="gallery-name">境界線</div>
+            <div class="gallery-desc">Boundary / Mixed Media</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">003</div>
+            <div class="gallery-name">漂流</div>
+            <div class="gallery-desc">Drift / Reconstructed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">004</div>
+            <div class="gallery-name">余白</div>
+            <div class="gallery-desc">Negative Space / Indigo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">005</div>
+            <div class="gallery-name">体温</div>
+            <div class="gallery-desc">Body Heat / Patched</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-inner">
+        <div class="gallery-frame">
+          <div class="gallery-bg"><div class="gallery-bg-pattern"></div></div>
+          <div class="gallery-frame-inner">
+            <div class="gallery-num">006</div>
+            <div class="gallery-name">虚像</div>
+            <div class="gallery-desc">Phantom / Deconstructed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- STORY -->
+<section class="section story" id="story">
+  <div class="section-label reveal">Story</div>
+  <div class="story-content">
+    <blockquote class="story-quote reveal reveal-delay-1">
+      アートに感情を動かされた体験を、服に変換している。<br>
+      元ネタを再現したいわけではなく、心が動いた感覚を形にしている。<br>
+      このブランドはトレンドではなく、体験が起点です。
+    </blockquote>
+    <blockquote class="story-quote reveal reveal-delay-2">
+      消費者には僕たちの作品を見て、正解を出さずに違和感だったり、
+      自分なりに感じた感情を持ち帰って、自分なりに解釈して欲しい。
+    </blockquote>
+    <p class="story-credit reveal reveal-delay-3">— Designer</p>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <div class="manifesto-visual reveal">
+      <div class="manifesto-shadow"></div>
+      <div class="manifesto-frame">
+        <div class="manifesto-frame-label">wear it or frame it</div>
+      </div>
+    </div>
+    <div class="manifesto-text">
+      <div class="section-label reveal">Manifesto</div>
+      <h2 class="reveal reveal-delay-1">
+        着るのか、飾るのか。<br>
+        その答えは<em>あなた</em>が決めればいい。
+      </h2>
+      <p class="reveal reveal-delay-2">
+        これは着るためのものなのか、それとも飾るためのものなのか——
+        その答えは僕が決めるものではなく、手に取った人が決めればいいと思っています。
+      </p>
+      <p class="reveal reveal-delay-3">
+        現実と虚構の境界が曖昧になる瞬間のように、
+        服と作品の境界線も曖昧でいい。
+        シンプルにいうと、解釈を委ねる服。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ETHOS -->
+<section class="ethos" id="ethos">
+  <div class="section-label reveal">Keywords</div>
+  <div class="ethos-grid">
+    <div class="ethos-card reveal">
+      <div class="ethos-jp">違和感</div>
+      <div class="ethos-en">Dissonance</div>
+      <div class="ethos-desc">
+        大量生産・大量消費の世界に対する静かな問いかけ。
+        本来デニムは長く履いてこそ良いものになるのに、この業界の在り方に違和感がある。
+      </div>
+    </div>
+    <div class="ethos-card reveal reveal-delay-1">
+      <div class="ethos-jp">解釈を委ねる</div>
+      <div class="ethos-en">Open Interpretation</div>
+      <div class="ethos-desc">
+        作品に正解はない。手に取った人がそれぞれの物語を見出し、
+        それぞれの感情で受け取ればいい。用途を決めない。
+      </div>
+    </div>
+    <div class="ethos-card reveal reveal-delay-2">
+      <div class="ethos-jp">刺子</div>
+      <div class="ethos-en">Sashiko</div>
+      <div class="ethos-desc">
+        刺子は生き延びるための補修。壊れたものを直すのではなく、
+        新たな物語を縫い込む。そこに宿る手仕事の体温。
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FOOTER -->
+<section class="footer-section" id="contact">
+  <p class="footer-cta reveal">
+    あなたの解釈を、聞かせてください。
+  </p>
+  <a href="mailto:hello@between-studio.com" class="footer-btn reveal reveal-delay-1">Contact Us</a>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 between. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="#">Instagram</a>
+      <a href="#">Journal</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2200);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Cursor follower
+const cursor = document.getElementById('cursor');
+let cx = 0, cy = 0, tx = 0, ty = 0;
+
+document.addEventListener('mousemove', (e) => {
+  tx = e.clientX - 4;
+  ty = e.clientY - 4;
+  cursor.classList.add('active');
+});
+
+function animateCursor() {
+  cx += (tx - cx) * 0.08;
+  cy += (ty - cy) * 0.08;
+  cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Smooth parallax on hero
+const heroContent = document.querySelector('.hero-content');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY < window.innerHeight) {
+    heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+    heroContent.style.opacity = 1 - (scrollY / window.innerHeight) * 1.2;
+  }
+});
+</script>
+</body>
+</html>
