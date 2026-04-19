@@ -3,6 +3,7 @@
 export const runtime = "edge";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const LINE_URL = "https://line.me/ti/p/@857usrfa";
@@ -41,26 +42,41 @@ const sections = [
     number: "01",
     heading: "IAMALIARとは",
     body: `"I AM A LIAR"——「私は嘘つきです」\n\nその一言から、全ての矛盾は始まる。IAMALIARは、そんな矛盾を洋服で表現します。`,
+    image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90",
+    imageAlt: "藍染の布",
+    imageRight: true,
   },
   {
     number: "02",
     heading: "「衝撃を、纏う。」",
     body: `アートに突き動かされた衝動を、服として再構築する。\n\nあの作品を観た時の、あの衝撃。身体に残ったその感情の欠片を繋ぎ合わせ、服として具現化する。`,
+    image: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=900&q=90",
+    imageAlt: "伝統的な染色",
+    imageRight: false,
   },
   {
     number: "03",
     heading: "額縁に飾れる服作り",
     body: `壁に掛ければ芸術になり、身に纏えば日常になる。\n\n飾るためなのか、それとも着るためのものなのか、その解釈はあなたに委ねます。`,
+    image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&q=90",
+    imageAlt: "ギャラリー空間",
+    imageRight: true,
   },
   {
     number: "04",
     heading: "既製品を物語のある一点ものに変換する",
     body: `新しい生命を吹き込む。\n\n既製品として生まれ、誰かに消費され、いつか忘れ去られたもの。いつしか呼吸を止めた「かつての服」。私たちはその静止した時間に新しい物語を書き加える。`,
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=90",
+    imageAlt: "古着の素材感",
+    imageRight: false,
   },
   {
     number: "05",
     heading: "「刺し子」",
     body: `同じものは、二度と縫えない。\n\nかつて、大切な布を長く、強く使うために生まれた「刺し子」。私たちは、その伝統を受け継ぎ、ひと針ひと針に想いを込めて縫い上げます。均一ではない、あなただけの一点もの。`,
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=90",
+    imageAlt: "刺し子ステッチ詳細",
+    imageRight: true,
   },
 ];
 
@@ -133,17 +149,17 @@ export default function AboutPage() {
           </h2>
         </div>
 
-        <div className="space-y-20 md:space-y-28">
+        <div className="space-y-20 md:space-y-32">
           {sections.map((section, i) => (
             <div key={section.number}>
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 reveal">
-                <div className="md:col-span-2">
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#2e2e2e" }}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-0 reveal ${section.imageRight ? "" : "md:[&>*:first-child]:order-2"}`}>
+
+                {/* Text side */}
+                <div className={`flex flex-col justify-center py-8 ${section.imageRight ? "md:pr-16" : "md:pl-16 md:order-2"}`}>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.35em", color: "#2e2e2e", display: "block", marginBottom: "1.5rem" }}>
                     {section.number}
                   </span>
-                </div>
-                <div className="md:col-span-10 md:max-w-2xl">
-                  <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.4rem, 2vw, 2rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem" }}>
+                  <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.3rem, 2vw, 1.8rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
                     {section.heading}
                   </h3>
                   <div className="space-y-4">
@@ -151,7 +167,7 @@ export default function AboutPage() {
                       <p key={j} style={{
                         fontFamily: "'Noto Serif JP', serif",
                         fontWeight: j === 0 ? 200 : 300,
-                        fontSize: j === 0 ? "1.1rem" : "0.85rem",
+                        fontSize: j === 0 ? "1rem" : "0.83rem",
                         lineHeight: 2.2,
                         letterSpacing: "0.04em",
                         color: j === 0 ? "#e8e2d8" : "#6b6560",
@@ -161,9 +177,24 @@ export default function AboutPage() {
                     ))}
                   </div>
                 </div>
+
+                {/* Image side */}
+                <div className={`relative overflow-hidden ${section.imageRight ? "" : "md:order-1"}`} style={{ aspectRatio: "4/5" }}>
+                  <Image
+                    src={section.image}
+                    alt={section.imageAlt}
+                    fill
+                    className="object-cover"
+                    style={{ opacity: 0.55, filter: "sepia(0.2) contrast(1.05)" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  {/* subtle vignette */}
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(10,9,8,0.3) 0%, transparent 60%, rgba(10,9,8,0.4) 100%)" }} />
+                </div>
+
               </div>
               {i < sections.length - 1 && (
-                <div className="mt-20 md:mt-28 border-b border-[#1C1C1C]" />
+                <div className="mt-20 md:mt-32 border-b border-[#1C1C1C]" />
               )}
             </div>
           ))}
