@@ -14,12 +14,9 @@ export function SiteFooter() {
 
           {/* Brand */}
           <div>
-            <Link href="/" className="font-serif text-2xl tracking-[0.15em] text-[#E8E5DF] block mb-4">
+            <Link href="/" className="font-serif text-2xl tracking-[0.15em] text-[#E8E5DF] block">
               IAMALIAR
             </Link>
-            <p className="text-xs text-[#888888] leading-relaxed tracking-wide whitespace-pre-line">
-              {t.footer.brandDesc}
-            </p>
           </div>
 
           {/* Nav */}

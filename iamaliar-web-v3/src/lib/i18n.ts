@@ -9,7 +9,7 @@ export const translations = {
       contact: "Contact",
     },
     footer: {
-      brandDesc: "量産された衣服に対して新たな物語を与え、\n服と作品の境界を曖昧にするブランド。",
+      brandDesc: "",
       pages: "Pages",
       follow: "Follow",
       tagline: "wear it or frame it.",
@@ -20,8 +20,8 @@ export const translations = {
       brandStoryHeading: "「アートに食らった感情を服に変換する。」",
       sections: [
         {
-          heading: "IAMALIARとは",
-          body: `"I AM A LIAR"——「私は嘘つきです」\n\nその一言から、全ての矛盾は始まる。IAMALIARは、そんな矛盾を洋服で表現します。`,
+          heading: "I AM A LIAR"——「私は嘘つきです」",
+          body: `"「古くて、新しい、私」`,
           imageAlt: "藍染の布",
         },
         {
@@ -84,8 +84,7 @@ export const translations = {
       contact: "Contact",
     },
     footer: {
-      brandDesc:
-        "A brand that gives new narratives to mass-produced garments,\nblurring the line between clothing and artwork.",
+      brandDesc: "",
       pages: "Pages",
       follow: "Follow",
       tagline: "wear it or frame it.",
