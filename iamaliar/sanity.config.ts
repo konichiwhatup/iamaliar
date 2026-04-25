@@ -3,8 +3,13 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {Iframe} from 'sanity-plugin-iframe-pane'
 import {schemaTypes} from './schemaTypes'
+import {CustomLayout} from './components/CustomLayout'
 
-const PREVIEW_URL = 'https://iamaliar.pages.dev'
+// ローカル開発時は localhost、本番は pages.dev を使う
+const PREVIEW_URL =
+  typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://iamaliar.pages.dev'
 const PREVIEW_SECRET = 'iamaliar-preview-2026'
 
 export default defineConfig({
@@ -14,45 +19,28 @@ export default defineConfig({
   projectId: '22x23c52',
   dataset: 'productionenabled',
 
+  // Releases / Perspective 機能を無効化(Published/Draft の切替UIを隠す)
+  releases: {
+    enabled: false,
+  },
+
+  // Studio UI のカスタマイズ:Perspective の切替ピルをCSSで非表示化
+  studio: {
+    components: {
+      layout: CustomLayout,
+    },
+  },
+
   plugins: [
     structureTool({
-      structure: (S) => {
-        const makeTypeList = (type: string, title: string) =>
-          S.listItem()
-            .title(title)
-            .child(
-              S.list()
-                .title(title)
-                .items([
-                  S.listItem()
-                    .title('Published')
-                    .schemaType(type)
-                    .child(
-                      S.documentList()
-                        .title('Published')
-                        .schemaType(type)
-                        .filter(`_type == "${type}" && !(_id in path("drafts.**"))`)
-                    ),
-                  S.listItem()
-                    .title('Draft')
-                    .schemaType(type)
-                    .child(
-                      S.documentList()
-                        .title('Draft')
-                        .schemaType(type)
-                        .filter(`_type == "${type}" && _id in path("drafts.**")`)
-                    ),
-                ])
-            )
-
-        return S.list()
+      structure: (S) =>
+        S.list()
           .title('Content')
           .items([
-            makeTypeList('product', '商品'),
-            makeTypeList('journal', 'ジャーナル'),
-            makeTypeList('faq', 'FAQ'),
-          ])
-      },
+            S.documentTypeListItem('product').title('商品'),
+            S.documentTypeListItem('journal').title('ジャーナル'),
+            S.documentTypeListItem('faq').title('FAQ'),
+          ]),
       defaultDocumentNode: (S, {schemaType}) => {
         if (['product', 'journal'].includes(schemaType)) {
           return S.document().views([
@@ -62,8 +50,14 @@ export default defineConfig({
               .options({
                 url: (doc: any) => {
                   const slug = doc?.slug?.current
-                  if (!slug) return `${PREVIEW_URL}/api/draft/enable?secret=${PREVIEW_SECRET}&slug=/collection`
-                  const path = schemaType === 'product' ? `/collection/${slug}` : `/journal/${slug}`
+                  const path =
+                    schemaType === 'product'
+                      ? slug
+                        ? `/collection/${slug}`
+                        : '/collection'
+                      : slug
+                        ? `/journal/${slug}`
+                        : '/journal'
                   return `${PREVIEW_URL}/api/draft/enable?secret=${PREVIEW_SECRET}&slug=${path}`
                 },
                 reload: {button: true},

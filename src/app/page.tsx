@@ -74,7 +74,7 @@ export default function AboutPage() {
             color: "#e8e2d8",
             animation: "fadeUp 1.8s cubic-bezier(0.22,1,0.36,1) 2.2s both",
           }}>
-            IAMALIAR
+            I&nbsp;AM&nbsp;A&nbsp;LIAR
           </h1>
           <p style={{
             fontFamily: "var(--font-noto-serif, 'Noto Serif JP'), serif",

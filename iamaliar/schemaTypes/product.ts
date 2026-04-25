@@ -7,41 +7,34 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'タイトル (英)',
+      title: '題名',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'artworkTitle',
-      title: '作品タイトル (日)',
-      type: 'string',
     }),
     defineField({
       name: 'slug',
-      title: 'Slug',
+      title: 'Slug (URL)',
       type: 'slug',
-      options: { source: 'title' },
+      description: '題名から自動生成されます。手動で編集も可能。',
+      options: { source: 'title', maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'status',
-      title: 'ステータス',
-      type: 'string',
-      options: {
-        list: [
-          { title: '販売中', value: 'active' },
-          { title: 'Sold', value: 'sold' },
-          { title: '受注制作', value: 'made_to_order' },
-          { title: 'アーカイブ', value: 'archived' },
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'active',
+      name: 'description',
+      title: '説明文',
+      type: 'text',
+      rows: 4,
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'price',
+      title: '値段 (JPY)',
+      type: 'number',
+      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
       name: 'category',
-      title: 'カテゴリー',
+      title: 'カテゴリ',
       type: 'string',
       options: {
         list: [
@@ -55,75 +48,40 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'subtitle',
-      title: 'サブタイトル',
-      type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: '説明文',
-      type: 'text',
-      rows: 4,
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'story',
       title: '制作ストーリー',
       type: 'text',
-      rows: 5,
+      rows: 6,
     }),
     defineField({
-      name: 'conceptNote',
-      title: 'コンセプトノート',
+      name: 'sizes',
+      title: 'サイズ表記',
+      type: 'array',
+      description: '自由記入。例:「フリーサイズ」「M (着丈70cm 身幅55cm)」「オーダー」など。複数追加可。',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'material',
+      title: '素材',
       type: 'text',
-      rows: 4,
+      rows: 2,
+      description: '例: コットン100% / インディゴデニム + ヴィンテージリネン',
     }),
     defineField({
-      name: 'price',
-      title: '価格 (JPY)',
-      type: 'number',
-      validation: (Rule) => Rule.required().min(0),
-    }),
-    defineField({
-      name: 'compareAtPrice',
-      title: '定価 (比較用)',
-      type: 'number',
-    }),
-    defineField({
-      name: 'tags',
-      title: 'タグ',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-    }),
-    defineField({
-      name: 'baseMaterial',
-      title: 'ベース素材',
+      name: 'status',
+      title: 'ステータス',
       type: 'string',
-    }),
-    defineField({
-      name: 'materialDetails',
-      title: '素材詳細',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'craftsmanship',
-      title: '技法・クラフト',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'eraSource',
-      title: '年代 (ソース)',
-      type: 'string',
-      description: '例: 1990s, 1980s',
-    }),
-    defineField({
-      name: 'sourceBrand',
-      title: 'ソースブランド',
-      type: 'string',
-      description: '例: Levi\'s, Wrangler',
+      options: {
+        list: [
+          { title: '販売中', value: 'active' },
+          { title: 'Sold (販売済み)', value: 'sold' },
+          { title: '受注制作', value: 'made_to_order' },
+          { title: 'アーカイブ', value: 'archived' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'active',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'featuredImage',
@@ -134,95 +92,10 @@ export default defineType({
     }),
     defineField({
       name: 'gallery',
-      title: 'ギャラリー画像',
+      title: 'その他の画像',
       type: 'array',
+      description: '追加で見せたい写真(複数可)',
       of: [{ type: 'image', options: { hotspot: true } }],
-    }),
-    defineField({
-      name: 'detailShots',
-      title: 'ディテール写真',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'image', title: '画像', type: 'image', options: { hotspot: true } }),
-            defineField({ name: 'caption', title: 'キャプション', type: 'string' }),
-            defineField({
-              name: 'focusType',
-              title: 'フォーカスタイプ',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'ステッチ', value: 'stitch' },
-                  { title: 'パッチワーク', value: 'patchwork' },
-                  { title: '生地', value: 'fabric' },
-                  { title: 'ダメージ', value: 'distress' },
-                  { title: 'シルエット', value: 'silhouette' },
-                  { title: 'その他', value: 'other' },
-                ],
-              },
-            }),
-          ],
-          preview: {
-            select: { title: 'caption', media: 'image' },
-            prepare: ({ title, media }) => ({ title: title || 'ディテール', media }),
-          },
-        },
-      ],
-    }),
-    defineField({
-      name: 'sizes',
-      title: 'サイズ情報',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'label', title: 'サイズラベル', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'stock', title: '在庫数', type: 'number', initialValue: 1 }),
-            defineField({ name: 'sku', title: 'SKU', type: 'string' }),
-            defineField({
-              name: 'measurements',
-              title: '寸法 (cm)',
-              type: 'object',
-              fields: [
-                defineField({ name: 'waist', title: 'ウエスト', type: 'number' }),
-                defineField({ name: 'rise', title: 'ライズ', type: 'number' }),
-                defineField({ name: 'inseam', title: '股下', type: 'number' }),
-                defineField({ name: 'thigh', title: 'もも幅', type: 'number' }),
-                defineField({ name: 'hem', title: '裾幅', type: 'number' }),
-                defineField({ name: 'shoulder', title: '肩幅', type: 'number' }),
-                defineField({ name: 'chest', title: '胸囲', type: 'number' }),
-                defineField({ name: 'sleeve', title: '袖丈', type: 'number' }),
-                defineField({ name: 'length', title: '着丈', type: 'number' }),
-              ],
-            }),
-          ],
-          preview: {
-            select: { title: 'label', subtitle: 'stock' },
-            prepare: ({ title, subtitle }) => ({ title, subtitle: `在庫: ${subtitle}` }),
-          },
-        },
-      ],
-    }),
-    defineField({
-      name: 'madeToOrder',
-      title: '受注制作',
-      type: 'boolean',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'leadTime',
-      title: 'リードタイム',
-      type: 'string',
-      description: '例: 4〜6週間',
-      hidden: ({ document }) => !document?.madeToOrder,
-    }),
-    defineField({
-      name: 'availabilityText',
-      title: '在庫テキスト',
-      type: 'string',
     }),
     defineField({
       name: 'publishedAt',
@@ -233,10 +106,18 @@ export default defineType({
   ],
   preview: {
     select: { title: 'title', subtitle: 'status', media: 'featuredImage' },
-    prepare: ({ title, subtitle, media }) => ({
-      title,
-      subtitle: subtitle === 'active' ? '販売中' : subtitle === 'sold' ? 'Sold' : subtitle,
-      media,
-    }),
+    prepare: ({ title, subtitle, media }) => {
+      const labels: Record<string, string> = {
+        active: '販売中',
+        sold: 'Sold',
+        made_to_order: '受注制作',
+        archived: 'アーカイブ',
+      }
+      return {
+        title,
+        subtitle: labels[subtitle as string] ?? subtitle,
+        media,
+      }
+    },
   },
 })

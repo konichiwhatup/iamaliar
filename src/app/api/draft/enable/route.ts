@@ -13,11 +13,14 @@ export async function GET(request: NextRequest) {
     return new Response('Invalid secret', { status: 401 })
   }
 
+  const isProd = process.env.NODE_ENV === 'production'
   const response = NextResponse.redirect(new URL(slug, request.url))
   response.cookies.set('preview-mode', 'true', {
     httpOnly: true,
-    secure: true,
-    sameSite: 'none',
+    // 本番(HTTPS)ではクロスオリジン iframe のため secure + SameSite=None
+    // 開発(localhost HTTP)では secure を外し SameSite=Lax にしないと Cookie 自体が破棄される
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
     path: '/',
     maxAge: 60 * 60,
   })

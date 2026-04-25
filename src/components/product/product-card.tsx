@@ -10,7 +10,7 @@ import type { Product } from "@/types/product";
 
 export function ProductCard({ product }: { product: Product }) {
   const [hovered, setHovered] = useState(false);
-  const secondImage = product.gallery[1] ?? product.featuredImage;
+  const secondImage = product.gallery[0] ?? product.featuredImage;
   const isSold = product.status === "sold" || product.status === "archived";
 
   return (
@@ -24,7 +24,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="relative overflow-hidden bg-[#141414] aspect-[3/4] mb-4">
         <Image
           src={hovered && secondImage !== product.featuredImage ? secondImage : product.featuredImage}
-          alt={product.artworkTitle ?? product.title}
+          alt={product.title}
           fill
           className={cn(
             "object-cover transition-all duration-700",
@@ -49,12 +49,9 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="space-y-1">
         <div className="flex items-start justify-between gap-2">
           <div>
-            {product.artworkTitle && (
-              <p className="font-serif text-sm text-[#E8E5DF] leading-snug">
-                {product.artworkTitle}
-              </p>
-            )}
-            <p className="text-xs text-[#888888] tracking-wide mt-0.5">{product.title}</p>
+            <p className="font-serif text-sm text-[#E8E5DF] leading-snug">
+              {product.title}
+            </p>
           </div>
           <StatusBadge status={product.status} className="shrink-0 mt-0.5" />
         </div>

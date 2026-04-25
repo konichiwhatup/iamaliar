@@ -9,8 +9,8 @@ import { Providers } from "@/components/providers";
 export const runtime = "edge";
 
 export const metadata: Metadata = {
-  title: { default: "IAMALIAR — 服と作品のあいだ", template: "%s | IAMALIAR" },
-  description: "IAMALIARは、量産された衣服に対して新たな物語を与え、服と作品の境界を曖昧にするブランドである。",
+  title: { default: "IAMALIAR — Between garment and artwork", template: "%s | IAMALIAR" },
+  description: "IAMALIAR gives new narratives to mass-produced garments, blurring the boundary between clothing and art.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

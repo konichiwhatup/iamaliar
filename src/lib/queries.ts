@@ -1,6 +1,13 @@
 import { getClient } from './sanity'
 import type { Product, JournalPost } from '@/types/product'
 
+// 開発環境では fetch キャッシュを完全に無効化(Studio での変更を即時反映)
+// 本番では Next.js のデフォルト挙動に任せる
+function cacheOpt() {
+  if (process.env.NODE_ENV === 'production') return undefined
+  return { cache: 'no-store' as const, next: { revalidate: 0 } }
+}
+
 // ── 型変換ヘルパー ────────────────────────────────────────────
 function toImageUrl(image: any): string {
   if (!image?.asset?._ref) return ''
@@ -14,40 +21,16 @@ function toProduct(doc: any): Product {
     id: doc._id,
     slug: doc.slug?.current ?? '',
     status: doc.status,
+    category: doc.category,
     title: doc.title,
-    artworkTitle: doc.artworkTitle,
-    subtitle: doc.subtitle,
     description: doc.description ?? '',
     story: doc.story,
-    conceptNote: doc.conceptNote,
-    category: doc.category,
-    tags: doc.tags ?? [],
-    baseMaterial: doc.baseMaterial,
-    materialDetails: doc.materialDetails ?? [],
-    craftsmanship: doc.craftsmanship ?? [],
-    eraSource: doc.eraSource,
-    sourceBrand: doc.sourceBrand,
+    material: doc.material,
     price: doc.price ?? 0,
-    compareAtPrice: doc.compareAtPrice,
-    currency: 'JPY',
-    sizes: (doc.sizes ?? []).map((s: any) => ({
-      label: s.label,
-      measurements: s.measurements ?? {},
-      stock: s.stock ?? 0,
-      sku: s.sku,
-    })),
-    availabilityText: doc.availabilityText,
-    madeToOrder: doc.madeToOrder ?? false,
-    leadTime: doc.leadTime,
+    sizes: doc.sizes ?? [],
     featuredImage: toImageUrl(doc.featuredImage),
     gallery: (doc.gallery ?? []).map(toImageUrl),
-    detailShots: (doc.detailShots ?? []).map((d: any) => ({
-      image: toImageUrl(d.image),
-      caption: d.caption,
-      focusType: d.focusType,
-    })),
     publishedAt: doc.publishedAt ?? doc._createdAt,
-    updatedAt: doc._updatedAt,
   }
 }
 
@@ -77,7 +60,11 @@ function toJournal(doc: any): JournalPost {
 export async function getProducts(): Promise<Product[]> {
   try {
     const c = await getClient()
-    const docs = await c.fetch(`*[_type == "product"] | order(publishedAt desc)`)
+    const docs = await c.fetch(
+      `*[_type == "product"] | order(publishedAt desc)`,
+      {},
+      cacheOpt(),
+    )
     return docs.map(toProduct)
   } catch {
     return []
@@ -87,7 +74,11 @@ export async function getProducts(): Promise<Product[]> {
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
   try {
     const c = await getClient()
-    const doc = await c.fetch(`*[_type == "product" && slug.current == $slug][0]`, { slug })
+    const doc = await c.fetch(
+      `*[_type == "product" && slug.current == $slug][0]`,
+      { slug },
+      cacheOpt(),
+    )
     return doc ? toProduct(doc) : undefined
   } catch {
     return undefined
@@ -99,7 +90,8 @@ export async function getRelatedProducts(product: Product): Promise<Product[]> {
     const c = await getClient()
     const docs = await c.fetch(
       `*[_type == "product" && category == $category && _id != $id] | order(publishedAt desc)[0...3]`,
-      { category: product.category, id: product.id }
+      { category: product.category, id: product.id },
+      cacheOpt(),
     )
     return docs.map(toProduct)
   } catch {

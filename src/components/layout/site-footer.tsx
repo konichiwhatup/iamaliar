@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
 
-const LINE_URL = "https://line.me/ti/p/@857usrfa";
-
 export function SiteFooter() {
   const { t } = useLanguage();
 
@@ -33,10 +31,13 @@ export function SiteFooter() {
           <div>
             <h4 className="text-xs tracking-[0.15em] uppercase text-[#E8E5DF] mb-5">{t.footer.follow}</h4>
             <nav className="flex flex-col gap-3">
-              <a href="#" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">Instagram</a>
-              <a href="#" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">TikTok</a>
-              <a href={LINE_URL} target="_blank" rel="noopener noreferrer" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">
-                LINE @857usrfa
+              <a
+                href="https://www.instagram.com/watashi_wa_usotsuki_desu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide"
+              >
+                Instagram
               </a>
             </nav>
           </div>

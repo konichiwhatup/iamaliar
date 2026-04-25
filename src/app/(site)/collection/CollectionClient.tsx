@@ -35,8 +35,8 @@ export default function CollectionClient({ products }: { products: Product[] }) 
         {/* Header */}
         <FadeIn>
           <div className="mb-16">
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase", marginBottom: "1rem" }}>
-              IAMALIAR
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.8rem", letterSpacing: "0.05em", color: "#555555", textTransform: "uppercase", marginBottom: "1rem" }}>
+              I AM A LIAR
             </p>
             <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "0.1em", color: "#E8E5DF" }}>
               Collection
@@ -96,11 +96,11 @@ export default function CollectionClient({ products }: { products: Product[] }) 
                   {product.featuredImage ? (
                     <Image
                       src={
-                        hovered === product.id && product.gallery[1]
-                          ? product.gallery[1]
+                        hovered === product.id && product.gallery[0]
+                          ? product.gallery[0]
                           : product.featuredImage
                       }
-                      alt={product.artworkTitle ?? product.title}
+                      alt={product.title}
                       fill
                       className="object-cover transition-all duration-700"
                       style={{
@@ -117,12 +117,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
                     <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.3em", color: "#6b6560", marginBottom: "0.5rem" }}>
                       {String(i + 1).padStart(3, "0")}
                     </p>
-                    {product.artworkTitle && (
-                      <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.9rem", letterSpacing: "0.08em", color: "#e8e2d8", lineHeight: 1.4 }}>
-                        {product.artworkTitle}
-                      </p>
-                    )}
-                    <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.15em", color: "#6b6560", textTransform: "uppercase", marginTop: "0.3rem" }}>
+                    <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.9rem", letterSpacing: "0.08em", color: "#e8e2d8", lineHeight: 1.4 }}>
                       {product.title}
                     </p>
                   </div>

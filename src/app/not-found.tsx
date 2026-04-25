@@ -1,8 +1,13 @@
-import Link from "next/link";
+"use client";
 
 export const runtime = "edge";
 
+import Link from "next/link";
+import { useLanguage } from "@/context/language-context";
+
 export default function NotFound() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
@@ -11,13 +16,13 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="text-sm text-[#888888] mb-10">
-          お探しのページは見つかりませんでした。
+          {t.notFound.message}
         </p>
         <Link
           href="/"
           className="text-xs tracking-[0.2em] uppercase text-[#E8E5DF] hover:opacity-60 transition-opacity link-underline"
         >
-          Return Home
+          {t.notFound.returnHome}
         </Link>
       </div>
     </div>

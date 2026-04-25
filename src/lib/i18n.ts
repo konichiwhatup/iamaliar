@@ -56,7 +56,7 @@ export const translations = {
     },
     contact: {
       label: "Contact",
-      heading: "あなたの解釈を、\n聞かせてください。",
+      heading: "あなたの解釈を、聞かせてください。",
       subtext:
         "作品についての質問、オーダーの相談、コラボレーションのご提案など、お気軽にLINEからご連絡ください。",
       lineOpen: "LINE を開く",
@@ -75,6 +75,30 @@ export const translations = {
         },
       ],
     },
+    journal: {
+      subtitle: "制作の過程、思想、展示の記録。",
+      backToList: "← すべての記録へ",
+      readMore: "Read →",
+    },
+    product: {
+      backToCollection: "← Collection",
+      status: {
+        active: "販売中",
+        sold: "Sold",
+        made_to_order: "受注制作",
+        archived: "アーカイブ",
+      },
+      taxNote: "JPY (税込)",
+      ctaLine: "LINE で問い合わせる",
+      sizeLabel: "Size",
+      story: "Story",
+      material: "Material",
+      relatedWorks: "Related Works",
+    },
+    notFound: {
+      message: "お探しのページは見つかりませんでした。",
+      returnHome: "Return Home",
+    },
   },
   en: {
     nav: {
@@ -90,33 +114,33 @@ export const translations = {
       tagline: "wear it or frame it.",
     },
     home: {
-      heroTagline: "The interpretation is yours to decide.",
+      heroTagline: "The interpretation is yours.",
       brandStoryLabel: "Brand Story",
-      brandStoryHeading: '"Converting the shock of art into clothing."',
+      brandStoryHeading: "Old, yet new — myself.",
       sections: [
         {
-          heading: "What is IAMALIAR",
-          body: "",
+          heading: `"I AM A LIAR" — "I am a liar."`,
+          body: `From those few words, every contradiction begins.`,
           imageAlt: "Indigo-dyed fabric",
         },
         {
-          heading: '"Wear the impact."',
-          body: `Reconstructing the impulse driven by art into a garment.\n\nThat shock felt when encountering a work. We gather the emotional fragments left in the body and give them form as clothing.`,
+          heading: "Wear the impact.",
+          body: `We reconstruct the impulse stirred by art into a garment.\n\nThat shock the moment you encounter a work — we gather the fragments of feeling it leaves in the body, and give them form as clothing.`,
           imageAlt: "Japanese countryside",
         },
         {
-          heading: "Clothing worthy of a frame",
-          body: `Hung on a wall, it becomes art. Worn on the body, it becomes everyday life.\n\nWhether it is meant to be displayed or worn — the interpretation is yours.`,
+          heading: "Clothing made to be framed.",
+          body: `Hang it on a wall and it becomes art; wear it on the body and it becomes everyday life.\n\nWhether it is meant to be displayed or worn — the interpretation is yours.`,
           imageAlt: "Museum frame",
         },
         {
-          heading: "Transforming the ordinary into a story",
-          body: `Breathing new life into the forgotten.\n\nBorn as mass-produced items, consumed by someone, and eventually forgotten — garments that once stopped breathing. We write new stories into that still moment.`,
+          heading: "Turning the mass-produced into one-of-a-kind stories.",
+          body: `Breathing new life into what was forgotten.\n\nBorn as mass-produced goods, consumed by someone, and eventually forgotten — garments that long ago stopped breathing. Into that stillness, we write a new story.`,
           imageAlt: "Artisan at work",
         },
         {
-          heading: '"Sashiko"',
-          body: `No two pieces can ever be stitched the same.\n\nOnce born to extend the life of precious fabric, sashiko is a tradition we carry forward — stitch by stitch, with intention. An uneven, unrepeatable piece made only for you.`,
+          heading: "Sashiko.",
+          body: `No two pieces are ever stitched the same.\n\nSashiko was born to extend the life of cherished cloth. We carry that tradition forward, stitching each line with intention — an uneven, unrepeatable piece made only for you.`,
           imageAlt: "Sashiko fabric",
         },
       ],
@@ -132,7 +156,7 @@ export const translations = {
     },
     contact: {
       label: "Contact",
-      heading: "Tell us\nyour interpretation.",
+      heading: "Tell us your interpretation.",
       subtext:
         "Questions about our works, order enquiries, collaboration proposals — feel free to reach out via LINE.",
       lineOpen: "Open LINE",
@@ -150,6 +174,30 @@ export const translations = {
           body: "Collaborations, press enquiries, and any other matters are welcome.",
         },
       ],
+    },
+    journal: {
+      subtitle: "A record of process, philosophy, and exhibitions.",
+      backToList: "← Back to all entries",
+      readMore: "Read →",
+    },
+    product: {
+      backToCollection: "← Collection",
+      status: {
+        active: "Available",
+        sold: "Sold",
+        made_to_order: "Made to order",
+        archived: "Archived",
+      },
+      taxNote: "JPY (tax incl.)",
+      ctaLine: "Contact via LINE",
+      sizeLabel: "Size",
+      story: "Story",
+      material: "Material",
+      relatedWorks: "Related Works",
+    },
+    notFound: {
+      message: "The page you are looking for could not be found.",
+      returnHome: "Return Home",
     },
   },
 } as const;

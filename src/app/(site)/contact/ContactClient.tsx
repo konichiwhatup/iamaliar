@@ -18,7 +18,7 @@ export function ContactClient() {
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase", marginBottom: "1.5rem" }}>
             {label}
           </p>
-          <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "0.08em", color: "#E8E5DF", lineHeight: 1.4, marginBottom: "1.5rem", whiteSpace: "pre-line" }}>
+          <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.4rem, 3.4vw, 2.6rem)", letterSpacing: "0.08em", color: "#E8E5DF", lineHeight: 1.4, marginBottom: "1.5rem", whiteSpace: "nowrap" }}>
             {heading}
           </h1>
           <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.9rem", lineHeight: 2, color: "#6b6560", maxWidth: "36rem" }}>

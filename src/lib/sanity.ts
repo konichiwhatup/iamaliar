@@ -13,12 +13,16 @@ export async function getClient() {
     // edge runtime で cookies が使えない場合は published にフォールバック
   }
 
+  // 開発環境では CDN を使わず常に最新を取得(Studio での変更が即時反映)
+  // 本番では CDN を使ってレスポンス高速化(最大60秒のキャッシュ)
+  const isProd = process.env.NODE_ENV === 'production'
+
   return createClient({
     projectId: PROJECT_ID,
     dataset: DATASET,
     apiVersion: '2026-04-19',
-    useCdn: !isPreview,
+    useCdn: isProd && !isPreview,
     token: isPreview ? process.env.SANITY_API_READ_TOKEN : undefined,
-    perspective: isPreview ? 'previewDrafts' : 'published',
+    perspective: isPreview ? 'drafts' : 'published',
   })
 }

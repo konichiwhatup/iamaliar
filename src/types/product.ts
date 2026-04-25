@@ -1,62 +1,20 @@
 export type ProductStatus = "active" | "sold" | "archived" | "made_to_order";
 export type ProductCategory = "pants" | "jacket" | "shirt" | "other";
 
-export type Measurement = {
-  waist?: number;
-  rise?: number;
-  inseam?: number;
-  thigh?: number;
-  hem?: number;
-  shoulder?: number;
-  chest?: number;
-  sleeve?: number;
-  length?: number;
-};
-
-export type SizeInfo = {
-  label: string;
-  measurements: Measurement;
-  stock: number;
-  sku?: string;
-};
-
-export type DetailShot = {
-  image: string;
-  caption?: string;
-  focusType?: "stitch" | "patchwork" | "fabric" | "distress" | "silhouette" | "other";
-};
-
 export type Product = {
   id: string;
   slug: string;
   status: ProductStatus;
+  category: ProductCategory;
   title: string;
-  artworkTitle?: string;
-  subtitle?: string;
   description: string;
   story?: string;
-  conceptNote?: string;
-  category: ProductCategory;
-  tags: string[];
-  baseMaterial?: string;
-  materialDetails?: string[];
-  craftsmanship?: string[];
-  eraSource?: string;
-  sourceBrand?: string;
+  material?: string;
   price: number;
-  compareAtPrice?: number;
-  currency: "JPY";
-  sizes: SizeInfo[];
-  availabilityText?: string;
-  madeToOrder?: boolean;
-  leadTime?: string;
+  sizes: string[];
   featuredImage: string;
   gallery: string[];
-  detailShots: DetailShot[];
-  lookbookReferences?: string[];
-  journalReferences?: string[];
-  publishedAt: string;
-  updatedAt: string;
+  publishedAt?: string;
 };
 
 export type Lookbook = {
