@@ -23,8 +23,7 @@ export function SiteHeader() {
   return (
     <>
       <header
-        style={{ mixBlendMode: "difference" }}
-        className="fixed top-0 left-0 right-0 z-50 px-12 py-8 grid grid-cols-[1fr_auto_1fr] items-center md:gap-8"
+        className="fixed top-0 left-0 right-0 z-50 px-12 py-6 grid grid-cols-[1fr_auto_1fr] items-center md:gap-8 bg-[#0a0908]/80 backdrop-blur-md border-b border-[#1C1C1C]"
       >
         {/* Left spacer — keeps nav truly centered */}
         <div className="hidden md:block" aria-hidden />

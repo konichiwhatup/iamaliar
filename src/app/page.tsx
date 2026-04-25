@@ -10,11 +10,16 @@ import { useLanguage } from "@/context/language-context";
 const LINE_URL = "https://line.me/ti/p/@857usrfa";
 
 const sectionImages = [
-  "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90",
-  "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=90",
-  "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=90",
+  // 1. 「私は嘘つきです」— マスク姿の鍛冶屋(職人気質、覆面で作業)
+  "https://images.unsplash.com/photo-1659484064532-96c49cb92d54?w=900&q=90",
+  // 2. 「衝撃を、纏う」— 時計の前に立つ人物(シュルレアル / 不条理な構図)
+  "https://images.unsplash.com/photo-1643529231242-7e52ab2f2207?w=900&q=90",
+  // 3. 「額縁に飾れる服作り」— 美術館のギャラリー
+  "https://images.unsplash.com/photo-1753838303423-d0cbfe0fca3a?w=900&q=90",
+  // 4. 「既製品を物語のある一点ものに変換する」— 手仕事をする職人(現状維持)
   "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=900&q=90",
-  "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=90",
+  // 5. 「刺し子」— 藍染と刺し子模様の生地
+  "https://images.unsplash.com/photo-1761808070289-595a9df13616?w=900&q=90",
 ];
 
 const imageRights = [true, false, true, false, true];

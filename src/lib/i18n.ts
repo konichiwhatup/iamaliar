@@ -22,17 +22,17 @@ export const translations = {
         {
           heading: `"I AM A LIAR"——「私は嘘つきです」`,
           body: `その一言から、全ての矛盾は始まる。`,
-          imageAlt: "藍染の布",
+          imageAlt: "マスクをつけて作業する鍛冶屋",
         },
         {
           heading: "「衝撃を、纏う。」",
           body: `アートに突き動かされた衝動を、服として再構築する。\n\nあの作品を観た時の、あの衝撃。身体に残ったその感情の欠片を繋ぎ合わせ、服として具現化する。`,
-          imageAlt: "日本の田舎風景",
+          imageAlt: "シュルレアル — 時計の前に立つ人物",
         },
         {
           heading: "額縁に飾れる服作り",
           body: `壁に掛ければ芸術になり、身に纏えば日常になる。\n\n飾るためなのか、それとも着るためのものなのか、その解釈はあなたに委ねます。`,
-          imageAlt: "美術館の額縁",
+          imageAlt: "美術館のギャラリー",
         },
         {
           heading: "既製品を物語のある一点ものに変換する",
@@ -42,7 +42,7 @@ export const translations = {
         {
           heading: "「刺し子」",
           body: `同じものは、二度と縫えない。\n\nかつて、大切な布を長く、強く使うために生まれた「刺し子」。私たちは、その伝統を受け継ぎ、ひと針ひと針に想いを込めて縫い上げます。均一ではない、あなただけの一点もの。`,
-          imageAlt: "刺し子の生地",
+          imageAlt: "藍染の刺し子布",
         },
       ],
       ctaCollection: "Collection を見る",
@@ -119,19 +119,19 @@ export const translations = {
       brandStoryHeading: "Old, yet new — myself.",
       sections: [
         {
-          heading: `"I AM A LIAR" — "I am a liar."`,
-          body: `From those few words, every contradiction begins.`,
-          imageAlt: "Indigo-dyed fabric",
+          heading: `I AM A LIAR`,
+          body: `One phrase — and every contradiction begins.`,
+          imageAlt: "Masked blacksmith at work",
         },
         {
           heading: "Wear the impact.",
           body: `We reconstruct the impulse stirred by art into a garment.\n\nThat shock the moment you encounter a work — we gather the fragments of feeling it leaves in the body, and give them form as clothing.`,
-          imageAlt: "Japanese countryside",
+          imageAlt: "Surrealist figure standing before a clock",
         },
         {
           heading: "Clothing made to be framed.",
           body: `Hang it on a wall and it becomes art; wear it on the body and it becomes everyday life.\n\nWhether it is meant to be displayed or worn — the interpretation is yours.`,
-          imageAlt: "Museum frame",
+          imageAlt: "Museum gallery",
         },
         {
           heading: "Turning the mass-produced into one-of-a-kind stories.",
@@ -141,7 +141,7 @@ export const translations = {
         {
           heading: "Sashiko.",
           body: `No two pieces are ever stitched the same.\n\nSashiko was born to extend the life of cherished cloth. We carry that tradition forward, stitching each line with intention — an uneven, unrepeatable piece made only for you.`,
-          imageAlt: "Sashiko fabric",
+          imageAlt: "Indigo sashiko cloth",
         },
       ],
       ctaCollection: "View Collection",
