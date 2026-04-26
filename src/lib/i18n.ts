@@ -22,27 +22,27 @@ export const translations = {
         {
           heading: `"I AM A LIAR"——「私は嘘つきです」`,
           body: `その一言から、全ての矛盾は始まる。`,
-          imageAlt: "マスクをつけて作業する鍛冶屋",
+          imageAlt: "藍染の布",
         },
         {
           heading: "「衝撃を、纏う。」",
           body: `アートに突き動かされた衝動を、服として再構築する。\n\nあの作品を観た時の、あの衝撃。身体に残ったその感情の欠片を繋ぎ合わせ、服として具現化する。`,
-          imageAlt: "シュルレアル — 時計の前に立つ人物",
+          imageAlt: "日本の田舎風景",
         },
         {
           heading: "額縁に飾れる服作り",
           body: `壁に掛ければ芸術になり、身に纏えば日常になる。\n\n飾るためなのか、それとも着るためのものなのか、その解釈はあなたに委ねます。`,
-          imageAlt: "美術館のギャラリー",
+          imageAlt: "美術館の額縁",
         },
         {
           heading: "既製品を物語のある一点ものに変換する",
-          body: `新しい生命を吹き込む。\n\n既製品として生まれ、誰かに消費され、いつか忘れ去られたもの。いつしか呼吸を止めた「かつての服」。私たちはその静止した時間に新しい物語を書き加える。`,
+          body: `新しい生命を吹き込む。\n\n既製品として生まれ、誰かに消費され、いつか忘れ去られたもの。いつしか呼吸を止めた「かつての服」私たちはその静止した時間に新しい物語を書き加える。`,
           imageAlt: "手仕事をする職人",
         },
         {
           heading: "「刺し子」",
           body: `同じものは、二度と縫えない。\n\nかつて、大切な布を長く、強く使うために生まれた「刺し子」。私たちは、その伝統を受け継ぎ、ひと針ひと針に想いを込めて縫い上げます。均一ではない、あなただけの一点もの。`,
-          imageAlt: "藍染の刺し子布",
+          imageAlt: "刺し子の生地",
         },
       ],
       ctaCollection: "Collection を見る",
@@ -56,10 +56,10 @@ export const translations = {
     },
     contact: {
       label: "Contact",
-      heading: "あなたの解釈を、聞かせてください。",
+      heading: "あなたの解釈を聞かせてください。",
       subtext:
         "作品についての質問、オーダーの相談、コラボレーションのご提案など、お気軽にLINEからご連絡ください。",
-      lineOpen: "LINE を開く",
+      lineOpen: "LINE で問い合わせる",
       items: [
         {
           label: "作品について",
@@ -114,34 +114,34 @@ export const translations = {
       tagline: "wear it or frame it.",
     },
     home: {
-      heroTagline: "The interpretation is yours.",
+      heroTagline: "The interpretation is yours to decide.",
       brandStoryLabel: "Brand Story",
-      brandStoryHeading: "Old, yet new — myself.",
+      brandStoryHeading: '"Converting the shock of art into clothing."',
       sections: [
         {
-          heading: `I AM A LIAR`,
-          body: `One phrase — and every contradiction begins.`,
-          imageAlt: "Masked blacksmith at work",
+          heading: "What is I AM A LIAR",
+          body: "",
+          imageAlt: "Indigo-dyed fabric",
         },
         {
-          heading: "Wear the impact.",
-          body: `We reconstruct the impulse stirred by art into a garment.\n\nThat shock the moment you encounter a work — we gather the fragments of feeling it leaves in the body, and give them form as clothing.`,
-          imageAlt: "Surrealist figure standing before a clock",
+          heading: '"Wear the impact."',
+          body: `Reconstructing the impulse driven by art into a garment.\n\nThat shock felt when encountering a work. We gather the emotional fragments left in the body and give them form as clothing.`,
+          imageAlt: "Japanese countryside",
         },
         {
-          heading: "Clothing made to be framed.",
-          body: `Hang it on a wall and it becomes art; wear it on the body and it becomes everyday life.\n\nWhether it is meant to be displayed or worn — the interpretation is yours.`,
-          imageAlt: "Museum gallery",
+          heading: "Clothing worthy of a frame",
+          body: `Hung on a wall, it becomes art. Worn on the body, it becomes everyday life.\n\nWhether it is meant to be displayed or worn — the interpretation is yours.`,
+          imageAlt: "Museum frame",
         },
         {
-          heading: "Turning the mass-produced into one-of-a-kind stories.",
-          body: `Breathing new life into what was forgotten.\n\nBorn as mass-produced goods, consumed by someone, and eventually forgotten — garments that long ago stopped breathing. Into that stillness, we write a new story.`,
+          heading: "Transforming the ordinary into a story",
+          body: `Breathing new life into the forgotten.\n\nBorn as mass-produced items, consumed by someone, and eventually forgotten — garments that once stopped breathing. We write new stories into that still moment.`,
           imageAlt: "Artisan at work",
         },
         {
-          heading: "Sashiko.",
-          body: `No two pieces are ever stitched the same.\n\nSashiko was born to extend the life of cherished cloth. We carry that tradition forward, stitching each line with intention — an uneven, unrepeatable piece made only for you.`,
-          imageAlt: "Indigo sashiko cloth",
+          heading: '"Sashiko"',
+          body: `No two pieces can ever be stitched the same.\n\nOnce born to extend the life of precious fabric, sashiko is a tradition we carry forward — stitch by stitch, with intention. An uneven, unrepeatable piece made only for you.`,
+          imageAlt: "Sashiko fabric",
         },
       ],
       ctaCollection: "View Collection",
@@ -156,10 +156,10 @@ export const translations = {
     },
     contact: {
       label: "Contact",
-      heading: "Tell us your interpretation.",
+      heading: "Tell us\nyour interpretation.",
       subtext:
         "Questions about our works, order enquiries, collaboration proposals — feel free to reach out via LINE.",
-      lineOpen: "Open LINE",
+      lineOpen: "Contact via LINE",
       items: [
         {
           label: "About the works",

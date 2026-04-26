@@ -1,17 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
   const { locale, t, toggle } = useLanguage();
-
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -21,21 +16,20 @@ export function SiteHeader() {
   ];
 
   return (
-    <>
-      <header
-        className="fixed top-0 left-0 right-0 z-50 px-12 py-6 grid grid-cols-[1fr_auto_1fr] items-center md:gap-8 bg-[#0a0908]/80 backdrop-blur-md border-b border-[#1C1C1C]"
-      >
-        {/* Left spacer — keeps nav truly centered */}
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0908]/80 backdrop-blur-md md:border-b md:border-[#1C1C1C]">
+      <div className="px-3 md:px-12 flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-8 md:py-6">
+        {/* PC のみ: 左スペーサー(nav を中央に) */}
         <div className="hidden md:block" aria-hidden />
 
-        <nav className="hidden md:flex items-center gap-10 justify-self-center">
+        {/* Nav: モバイルは下に区切り線、PCは線なし */}
+        <nav className="flex items-center justify-center gap-4 md:gap-10 py-3 md:py-0 border-b border-[#1C1C1C] md:border-b-0">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "font-mono-label link-accent transition-colors",
-                pathname === link.href ? "text-[#e8e2d8]" : "text-[#6b6560] hover:text-[#e8e2d8]"
+                "font-mono-label link-accent transition-colors whitespace-nowrap text-[1.1rem] md:text-xs tracking-[0.08em] md:tracking-[0.2em] font-medium md:font-normal",
+                pathname === link.href ? "text-[#e8e2d8]" : "text-[#a0998f] md:text-[#6b6560] hover:text-[#e8e2d8]"
               )}
             >
               {link.label}
@@ -43,10 +37,10 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        {/* Language toggle — desktop */}
+        {/* Language toggle: モバイルは線の下/右端、PCは右端 */}
         <button
           onClick={toggle}
-          className="hidden md:flex justify-self-end items-center font-mono-label text-[0.7rem] tracking-[0.2em] border border-[#1C1C1C] rounded-full overflow-hidden bg-[#0a0908]/40 backdrop-blur-sm relative"
+          className="self-end my-2 md:my-0 md:justify-self-end flex items-center font-mono-label text-[0.6rem] md:text-[0.7rem] tracking-[0.15em] md:tracking-[0.2em] border border-[#1C1C1C] rounded-full overflow-hidden bg-[#0a0908]/40 backdrop-blur-sm relative"
           aria-label="Toggle language"
         >
           <span
@@ -56,7 +50,7 @@ export function SiteHeader() {
           />
           <span
             className={cn(
-              "relative px-4 py-1.5 transition-colors duration-300",
+              "relative px-3 md:px-4 py-1 md:py-1.5 transition-colors duration-300",
               locale === "ja" ? "text-[#080808]" : "text-[#6b6560]"
             )}
           >
@@ -64,54 +58,7 @@ export function SiteHeader() {
           </span>
           <span
             className={cn(
-              "relative px-4 py-1.5 transition-colors duration-300",
-              locale === "en" ? "text-[#080808]" : "text-[#6b6560]"
-            )}
-          >
-            EN
-          </span>
-        </button>
-
-        <button className="md:hidden col-start-1 justify-self-start text-[#6b6560] hover:text-[#e8e2d8] transition-colors" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
-        </button>
-      </header>
-
-      {/* Mobile */}
-      <div className={cn(
-        "fixed inset-0 z-40 bg-[#0a0908] flex flex-col justify-center items-center transition-all duration-500 md:hidden",
-        menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      )}>
-        <nav className="flex flex-col items-center gap-12">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="font-serif text-3xl font-light tracking-wider text-[#e8e2d8] hover:text-[#c4a87c] transition-colors duration-300">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Language toggle — mobile */}
-        <button
-          onClick={toggle}
-          className="mt-16 flex items-center font-mono-label text-sm tracking-[0.2em] border border-[#1C1C1C] rounded-full overflow-hidden bg-[#0a0908]/40 relative"
-          aria-label="Toggle language"
-        >
-          <span
-            aria-hidden
-            className="absolute top-0 bottom-0 w-1/2 bg-[#e8e2d8] rounded-full transition-transform duration-300 ease-out"
-            style={{ transform: locale === "ja" ? "translateX(0)" : "translateX(100%)" }}
-          />
-          <span
-            className={cn(
-              "relative px-6 py-2 transition-colors duration-300",
-              locale === "ja" ? "text-[#080808]" : "text-[#6b6560]"
-            )}
-          >
-            JP
-          </span>
-          <span
-            className={cn(
-              "relative px-6 py-2 transition-colors duration-300",
+              "relative px-3 md:px-4 py-1 md:py-1.5 transition-colors duration-300",
               locale === "en" ? "text-[#080808]" : "text-[#6b6560]"
             )}
           >
@@ -119,6 +66,6 @@ export function SiteHeader() {
           </span>
         </button>
       </div>
-    </>
+    </header>
   );
 }

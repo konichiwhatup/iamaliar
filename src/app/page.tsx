@@ -66,10 +66,8 @@ export default function AboutPage() {
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse 80% 60% at 20% 80%, rgba(58,74,92,0.15), transparent), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,168,124,0.08), transparent), #0a0908"
         }} />
-        <div className="floating-frame-a absolute top-[15%] left-[8%] w-48 h-64 border opacity-60" style={{ borderColor: "rgba(196,168,124,0.15)" }} />
-        <div className="floating-frame-b absolute bottom-[12%] right-[10%] w-36 h-48 border opacity-60" style={{ borderColor: "rgba(196,168,124,0.15)" }} />
 
-        <div ref={heroRef} className="relative z-10 text-center">
+<div ref={heroRef} className="relative z-10 text-center">
           <h1 style={{
             fontFamily: "var(--font-cormorant, 'Cormorant Garamond'), serif",
             fontSize: "clamp(3rem, 10vw, 9rem)",
@@ -77,9 +75,10 @@ export default function AboutPage() {
             letterSpacing: "0.08em",
             lineHeight: 0.9,
             color: "#e8e2d8",
+            whiteSpace: "nowrap",
             animation: "fadeUp 1.8s cubic-bezier(0.22,1,0.36,1) 2.2s both",
           }}>
-            I&nbsp;AM&nbsp;A&nbsp;LIAR
+            I AM A LIAR
           </h1>
           <p style={{
             fontFamily: "var(--font-noto-serif, 'Noto Serif JP'), serif",
@@ -95,7 +94,7 @@ export default function AboutPage() {
           <div style={{
             width: 1, height: 80,
             background: "linear-gradient(to bottom, #c4a87c, transparent)",
-            margin: "3rem auto 0",
+            margin: "clamp(1rem, 4vw, 3rem) auto 0",
             animation: "fadeUp 1.8s cubic-bezier(0.22,1,0.36,1) 3s both",
           }} />
         </div>

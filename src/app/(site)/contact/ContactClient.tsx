@@ -34,39 +34,15 @@ export function ContactClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
             {/* Left: LINE CTA */}
-            <div>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase", marginBottom: "2rem" }}>
+            <div className="flex flex-col items-start md:items-center justify-center gap-6">
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase" }}>
                 LINE
               </p>
               <a
                 href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex flex-col items-start gap-1 mb-8"
-              >
-                <span style={{
-                  fontFamily: "Cormorant Garamond, serif",
-                  fontWeight: 300,
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "0.05em",
-                  color: "#e8e2d8",
-                  lineHeight: 1,
-                  transition: "color 0.3s",
-                }}
-                  className="group-hover:text-[#c4a87c]"
-                >
-                  @857usrfa
-                </span>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.25em", color: "#6b6560", textTransform: "uppercase" }}>
-                  tap to open LINE →
-                </span>
-              </a>
-
-              <a
-                href={LINE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline font-mono-label px-10 py-4 inline-block"
+                className="btn-outline font-mono-label px-10 py-4 inline-block text-center"
               >
                 {lineOpen}
               </a>

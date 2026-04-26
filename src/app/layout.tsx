@@ -3,7 +3,6 @@ import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Loader } from "@/components/ui/loader";
-import { CursorFollower } from "@/components/ui/cursor";
 import { Providers } from "@/components/providers";
 
 export const runtime = "edge";
@@ -27,7 +26,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <Providers>
           <Loader />
-          <CursorFollower />
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />

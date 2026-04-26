@@ -33,7 +33,7 @@
     background: var(--color-bg);
     color: var(--color-fg);
     overflow-x: hidden;
-    cursor: crosshair;
+    cursor: auto;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -135,7 +135,7 @@
     border: 1px solid #6b6560;
     color: #e8e2d8;
     transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    cursor: crosshair;
+    cursor: auto;
   }
   .btn-outline::before {
     content: '';
@@ -197,7 +197,7 @@
     border: 1px solid rgba(196, 168, 124, 0.2);
     color: #d4c5a9;
     transition: all 0.4s ease;
-    cursor: crosshair;
+    cursor: auto;
   }
   .keyword-badge:hover {
     background: rgba(196, 168, 124, 0.08);
