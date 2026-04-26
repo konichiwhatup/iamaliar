@@ -8,7 +8,7 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
 
-const LINE_URL = "https://line.me/ti/p/@857usrfa";
+const LINE_URL = "https://lin.ee/o94I6DM";
 
 const categoryLabels: Record<ProductCategory | "all", string> = {
   all: "All",
@@ -141,9 +141,6 @@ export default function CollectionClient({ products }: { products: Product[] }) 
             >
               {t.collection.ctaButton}
             </a>
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: "#555555", marginTop: "1rem" }}>
-              @857usrfa
-            </p>
           </div>
         </FadeIn>
 

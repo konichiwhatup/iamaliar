@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/language-context";
 
-const LINE_URL = "https://line.me/ti/p/@857usrfa";
+const LINE_URL = "https://lin.ee/o94I6DM";
 
 const sectionImages = [
   // 1. 「私は嘘つきです」— マスク姿の鍛冶屋(職人気質、覆面で作業)

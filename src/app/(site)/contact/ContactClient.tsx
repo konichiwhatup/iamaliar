@@ -3,7 +3,7 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLanguage } from "@/context/language-context";
 
-const LINE_URL = "https://line.me/ti/p/@857usrfa";
+const LINE_URL = "https://lin.ee/o94I6DM";
 
 export function ContactClient() {
   const { t } = useLanguage();

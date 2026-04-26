@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Product } from "@/types/product";
 import { useLanguage } from "@/context/language-context";
 
-const LINE_URL = "https://line.me/ti/p/@857usrfa";
+const LINE_URL = "https://lin.ee/o94I6DM";
 
 export default function ProductDetailClient({
   product,
