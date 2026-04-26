@@ -1,7 +1,9 @@
 import { createClient } from '@sanity/client'
 
-const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET!
+// 公開情報なのでハードコード(env var が edge 環境で読めない問題への対応)
+// 値を変更したい場合は env var で上書き可能
+const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '22x23c52'
+const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'productionenabled'
 
 export async function getClient() {
   let isPreview = false
