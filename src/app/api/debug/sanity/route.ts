@@ -8,13 +8,26 @@ export async function GET() {
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'productionenabled'
   const hasToken = Boolean(process.env.SANITY_API_READ_TOKEN)
 
+  // process.env の中で SANITY/NEXT_PUBLIC を含むキー名を一覧化(値は長さのみ)
+  const allKeys = Object.keys(process.env || {})
+  const sanityRelatedKeys = allKeys
+    .filter((k) => /SANITY|NEXT_PUBLIC|TOKEN/i.test(k))
+    .reduce<Record<string, string>>((acc, k) => {
+      const v = process.env[k]
+      acc[k] = v == null ? '(null/undefined)' : `length=${v.length}`
+      return acc
+    }, {})
+
   const env = {
     projectId,
     dataset,
     hasToken,
+    tokenLength: process.env.SANITY_API_READ_TOKEN?.length ?? 0,
     nodeEnv: process.env.NODE_ENV,
     rawProjectIdEnv: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '(undefined)',
     rawDatasetEnv: process.env.NEXT_PUBLIC_SANITY_DATASET ?? '(undefined)',
+    totalEnvKeys: allKeys.length,
+    sanityRelatedKeys,
   }
 
   // 1) 直接 fetch で Sanity API を叩く
