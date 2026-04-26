@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
   const secret = searchParams.get('secret')
   const slug = searchParams.get('slug') ?? '/'
 
-  const previewSecret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET
+  // 公開情報(URL改ざん防止の合言葉、本物の秘密ではない)
+  const previewSecret =
+    process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET || 'iamaliar-preview-2026'
 
   if (secret !== previewSecret) {
     return new Response('Invalid secret', { status: 401 })
