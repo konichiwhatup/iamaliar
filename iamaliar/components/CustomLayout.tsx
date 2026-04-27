@@ -8,14 +8,12 @@ export function CustomLayout(props: LayoutProps) {
   return (
     <>
       <style>{`
-        /* Document toolbar の Perspective 切替 (Published / Draft pill) */
-        [data-testid="document-perspective-list"],
+        /* Perspective UI(ドキュメント上部の "Published / Draft" ピル群と
+           ツールバー右上の "Published ▼" ドロップダウン)を非表示化。
+           サイドバーの状態ドットは別要素なので残る。 */
         [data-testid="perspective-menu-button"],
-        [data-testid="perspective-toolbar"],
-        [data-testid="release-perspective"],
-        button[aria-label*="erspective"],
-        button[aria-label*="リース"],
-        button[aria-label*="elease"] {
+        [data-testid="document-perspective-list"],
+        [data-testid="perspective-pill"] {
           display: none !important;
         }
       `}</style>

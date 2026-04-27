@@ -106,6 +106,7 @@ export const mockLookbooks: Lookbook[] = [
   },
 ];
 
+// Sanity に記事が無いときのフォールバック用デモ記事(2件のみ)
 export const mockJournals: JournalPost[] = [
   {
     id: "j001",
@@ -146,38 +147,6 @@ export const mockJournals: JournalPost[] = [
     author: "IAMALIAR",
     publishedAt: "2025-02-20",
   },
-  {
-    id: "j003",
-    slug: "exhibition-notes-gallery-yokohama",
-    title: "展示記録 — ギャラリー横浜",
-    excerpt: "初めての展示で気づいたこと。服が空間と対話するとき。",
-    category: "exhibition",
-    tags: ["exhibition", "gallery", "record"],
-    coverImage: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=90",
-    body: `展示という形式を選んだのは、服をギャラリーの文脈に置きたかったからだ。
-
-ハンガーに掛けられた服と、ガラスケースに入れられた絵画。どちらが「作品」で、どちらが「商品」なのか。
-
-来場者の多くは服に触れず、しばらく眺めていた。それが正解だと思った。`,
-    author: "IAMALIAR",
-    publishedAt: "2025-01-30",
-  },
-  {
-    id: "j004",
-    slug: "the-value-of-one-piece",
-    title: "一点物の価値について",
-    excerpt: "売れた服がブランドの証拠になる。Soldを消してはいけない理由。",
-    category: "note",
-    tags: ["one-of-a-kind", "value", "philosophy"],
-    coverImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=90",
-    body: `一点物のブランドにとって、Soldになった作品は「終わり」ではない。
-
-売れた服は、誰かの元で生き続ける。その事実がブランドの信頼になる。
-
-だからこそ、Soldになった作品をアーカイブとして見せ続けることが重要だ。消えた作品が積み重なって、ブランドの世界観に厚みが生まれる。`,
-    author: "IAMALIAR",
-    publishedAt: "2025-01-15",
-  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
@@ -186,10 +155,6 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 export function getLookbookBySlug(slug: string): Lookbook | undefined {
   return mockLookbooks.find((l) => l.slug === slug);
-}
-
-export function getJournalBySlug(slug: string): JournalPost | undefined {
-  return mockJournals.find((j) => j.slug === slug);
 }
 
 export function getRelatedProducts(product: Product): Product[] {

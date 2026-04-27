@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { mockJournals } from "@/data/mock-products";
+import type { JournalPost } from "@/types/product";
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLanguage } from "@/context/language-context";
 
@@ -14,9 +14,8 @@ const categoryLabel: Record<string, string> = {
   note: "Note",
 };
 
-export default function JournalListClient() {
+export default function JournalListClient({ journals }: { journals: JournalPost[] }) {
   const { t } = useLanguage();
-  const journals = mockJournals;
 
   return (
     <div className="pt-24 md:pt-32 pb-20">

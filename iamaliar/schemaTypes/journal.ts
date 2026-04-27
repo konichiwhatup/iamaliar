@@ -97,8 +97,17 @@ export default defineType({
     }),
     defineField({
       name: 'publishedAt',
-      title: '公開日',
+      title: '公開日(表示用・並び順用)',
       type: 'datetime',
+      description:
+        '⚠️ この「公開日」と、Sanity の「Scheduled Publishing(予約公開)」は別物です。\n' +
+        '\n' +
+        '【この欄(公開日)】記事一覧での並び順(新しい順)と表示日付に使われるだけの日付。' +
+        'ここの日付を未来にしても自動では公開されません。今すぐ公開したいときは右下の Publish を押してください。\n' +
+        '\n' +
+        '【予約公開したいとき】右下の Publish ボタン横の「▼」→「Schedule…」から日時指定してください。' +
+        '予約一覧は左メニューの Scheduled タブで確認できます。' +
+        '予約公開する場合は、こちらの「公開日」も同じ日時に揃えておくと一覧の並び順がズレません。',
       initialValue: () => new Date().toISOString(),
     }),
   ],
