@@ -28,6 +28,17 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
+            // ホームヒーロー設定はシングルトン:常に同じ 1 件を編集
+            S.listItem()
+              .title('ホーム画面ヒーロー')
+              .id('homeHero')
+              .child(
+                S.document()
+                  .schemaType('homeHero')
+                  .documentId('homeHero')
+                  .title('ホーム画面ヒーロー設定'),
+              ),
+            S.divider(),
             S.documentTypeListItem('product').title('商品'),
             S.documentTypeListItem('journal').title('ジャーナル'),
             S.documentTypeListItem('faq').title('FAQ'),
@@ -37,5 +48,13 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  // homeHero はシングルトン。グローバルの「+ 新規作成」メニューから除外する。
+  document: {
+    newDocumentOptions: (prev, { creationContext }) =>
+      creationContext.type === 'global'
+        ? prev.filter((opt) => opt.templateId !== 'homeHero')
+        : prev,
   },
 })

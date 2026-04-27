@@ -1,5 +1,5 @@
 import { getClient } from './sanity'
-import type { Product, JournalPost } from '@/types/product'
+import type { Product, JournalPost, HomeHero } from '@/types/product'
 
 // 開発環境では fetch キャッシュを完全に無効化(Studio での変更を即時反映)
 // 本番では Next.js のデフォルト挙動に任せる
@@ -115,6 +115,32 @@ export async function getJournalBySlug(slug: string): Promise<JournalPost | unde
     const c = await getClient()
     const doc = await c.fetch(`*[_type == "journal" && slug.current == $slug][0]`, { slug })
     return doc ? toJournal(doc) : undefined
+  } catch {
+    return undefined
+  }
+}
+
+// ── Home Hero (singleton) ──────────────────────────────────
+export async function getHomeHero(): Promise<HomeHero | undefined> {
+  try {
+    const c = await getClient()
+    const doc = await c.fetch(
+      `*[_type == "homeHero"][0]{
+        heroImage,
+        heroCaption,
+        heroImageOpacity,
+        "heroLinkSlug": heroLink->slug.current
+      }`,
+      {},
+      cacheOpt(),
+    )
+    if (!doc) return undefined
+    return {
+      heroImage: doc.heroImage ? toImageUrl(doc.heroImage) : undefined,
+      heroCaption: doc.heroCaption,
+      heroLinkSlug: doc.heroLinkSlug,
+      heroImageOpacity: typeof doc.heroImageOpacity === 'number' ? doc.heroImageOpacity : undefined,
+    }
   } catch {
     return undefined
   }

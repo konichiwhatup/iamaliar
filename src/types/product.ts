@@ -33,6 +33,13 @@ export type Lookbook = {
   publishedAt: string;
 };
 
+export type HomeHero = {
+  heroImage?: string;
+  heroCaption?: string;
+  heroLinkSlug?: string;
+  heroImageOpacity?: number;
+};
+
 export type JournalPost = {
   id: string;
   slug: string;

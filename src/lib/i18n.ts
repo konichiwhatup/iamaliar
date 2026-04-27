@@ -116,11 +116,11 @@ export const translations = {
     home: {
       heroTagline: "The interpretation is yours to decide.",
       brandStoryLabel: "Brand Story",
-      brandStoryHeading: '"Converting the shock of art into clothing."',
+      brandStoryHeading: '"Old, yet new — myself."',
       sections: [
         {
-          heading: "What is I AM A LIAR",
-          body: "",
+          heading: "I AM A LIAR",
+          body: "From those very words, every contradiction begins.",
           imageAlt: "Indigo-dyed fabric",
         },
         {
