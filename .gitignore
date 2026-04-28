@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# cloudflare wrangler local cache
+.wrangler/
+
+# local photo holding folder (sources, not deployed)
+/photo/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
