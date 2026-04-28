@@ -18,7 +18,7 @@ const sectionImages = [
   // 4. 「既製品を物語のある一点ものに変換する」
   "/home/IMG_1770.jpeg",
   // 5. 「刺し子」
-  "/home/IMG_1771.jpeg",
+  "/home/S__11411469.jpg",
 ];
 
 const imageRights = [true, false, true, false, true];
