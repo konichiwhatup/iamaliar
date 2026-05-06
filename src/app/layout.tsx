@@ -8,7 +8,7 @@ import { Providers } from "@/components/providers";
 export const runtime = "edge";
 
 export const metadata: Metadata = {
-  title: { default: "IAMALIAR — Between garment and artwork", template: "%s | IAMALIAR" },
+  title: { default: "Old, yet new — myself", template: "%s | IAMALIAR" },
   description: "IAMALIAR gives new narratives to mass-produced garments, blurring the boundary between clothing and art.",
 };
 
