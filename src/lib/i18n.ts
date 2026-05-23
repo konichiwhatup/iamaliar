@@ -79,6 +79,7 @@ export const translations = {
       subtitle: "制作の過程、思想、展示の記録。",
       backToList: "← すべての記録へ",
       readMore: "Read →",
+      comingSoonText: "記事を準備中です",
     },
     product: {
       backToCollection: "← Collection",
@@ -179,6 +180,7 @@ export const translations = {
       subtitle: "A record of process, philosophy, and exhibitions.",
       backToList: "← Back to all entries",
       readMore: "Read →",
+      comingSoonText: "Entries are being prepared",
     },
     product: {
       backToCollection: "← Collection",

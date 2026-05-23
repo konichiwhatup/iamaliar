@@ -39,6 +39,18 @@ export default function JournalListClient({ journals }: { journals: JournalPost[
         <div className="border-t border-[#1C1C1C] mb-12" />
 
         {/* Journal list */}
+        {journals.length === 0 ? (
+          <FadeIn delay={0.15}>
+            <div className="flex flex-col items-center justify-center py-32 text-center">
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: "#333333", textTransform: "uppercase", marginBottom: "1.5rem" }}>
+                — coming soon —
+              </p>
+              <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.1rem", letterSpacing: "0.1em", color: "#555555", lineHeight: 2 }}>
+                {t.journal.comingSoonText}
+              </p>
+            </div>
+          </FadeIn>
+        ) : (
         <div className="space-y-0">
           {journals.map((post, i) => (
             <FadeIn key={post.id} delay={i * 0.06}>
@@ -95,6 +107,7 @@ export default function JournalListClient({ journals }: { journals: JournalPost[
             </FadeIn>
           ))}
         </div>
+        )}
 
       </div>
     </div>
