@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Providers>
           <Loader />
           <SiteHeader />
-          <main>{children}</main>
+          <main className="isolate">{children}</main>
           <SiteFooter />
         </Providers>
       </body>
