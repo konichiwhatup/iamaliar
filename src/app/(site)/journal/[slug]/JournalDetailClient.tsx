@@ -19,7 +19,7 @@ export default function JournalDetailClient({ post }: { post: JournalPost }) {
   const bodyParagraphs = post.body.trim().split(/\n\n+/);
 
   return (
-    <div className="pt-24 md:pt-32 pb-24">
+    <div className="pt-12 md:pt-20 pb-24">
       <div className="container-site">
 
         {/* Back */}

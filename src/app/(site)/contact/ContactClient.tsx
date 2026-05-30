@@ -10,7 +10,7 @@ export function ContactClient() {
   const { label, heading, subtext, lineOpen, items } = t.contact;
 
   return (
-    <div className="min-h-screen flex flex-col justify-center pt-24 pb-20">
+    <div className="min-h-screen flex flex-col justify-center pt-12 pb-20">
       <div className="container-site">
 
         {/* Header */}

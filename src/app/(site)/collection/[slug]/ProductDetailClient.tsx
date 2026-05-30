@@ -19,7 +19,7 @@ export default function ProductDetailClient({
   const statusLabel = t.product.status as Record<string, string>;
 
   return (
-    <div className="pt-24 md:pt-32 pb-24">
+    <div className="pt-12 md:pt-20 pb-24">
       <div className="container-site">
 
         {/* Back */}

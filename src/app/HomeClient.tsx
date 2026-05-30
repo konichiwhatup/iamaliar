@@ -79,7 +79,7 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
   return (
     <>
       {/* ─── HERO ─── */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-[calc(100vh-53px)] md:h-[calc(100vh-77px)] flex items-center justify-center overflow-hidden">
         {/* Background gradient base */}
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse 80% 60% at 20% 80%, rgba(58,74,92,0.15), transparent), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,168,124,0.08), transparent), #0a0908"

@@ -29,7 +29,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
   }, [category, products]);
 
   return (
-    <div className="pt-24 md:pt-32 pb-20">
+    <div className="pt-12 md:pt-20 pb-20">
       <div className="container-site">
 
         {/* Header */}

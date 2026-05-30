@@ -18,7 +18,7 @@ export default function JournalListClient({ journals }: { journals: JournalPost[
   const { t } = useLanguage();
 
   return (
-    <div className="pt-24 md:pt-32 pb-20">
+    <div className="pt-12 md:pt-20 pb-20">
       <div className="container-site">
 
         {/* Header */}
