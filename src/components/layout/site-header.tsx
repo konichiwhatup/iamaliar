@@ -10,10 +10,17 @@ export function SiteHeader() {
   const { locale, t, toggle } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // モバイルドロワー用 (home はロゴから飛ぶため含めない)
   const navLinks = [
     { href: "/collection", label: t.nav.collection },
     { href: "/journal", label: t.nav.journal },
     { href: "/contact", label: t.nav.contact },
+  ];
+
+  // デスクトップ用 (home を含む元のナビ)
+  const desktopNavLinks = [
+    { href: "/", label: t.nav.home },
+    ...navLinks,
   ];
 
   // ルート遷移でメニューを閉じる
@@ -72,7 +79,7 @@ export function SiteHeader() {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0908] border-b border-[#1C1C1C]">
+    <header className="sticky top-0 z-50 bg-[#0a0908] md:bg-[#0a0908]/80 md:backdrop-blur-md border-b border-[#1C1C1C]">
       {/* モバイル: ハンバーガー / ロゴ / 言語切替 */}
       <div className="md:hidden grid grid-cols-[1fr_auto_1fr] items-center px-3 py-3">
         <button
@@ -143,11 +150,11 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* PC: ロゴ / ナビ / 言語切替 */}
+      {/* PC: 中央ナビ (home 含む) / 言語切替 */}
       <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-8 px-12 py-6">
-        <Brand className="justify-self-start" />
+        <div aria-hidden />
         <nav className="justify-self-center flex items-center gap-10">
-          {navLinks.map((link) => (
+          {desktopNavLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
