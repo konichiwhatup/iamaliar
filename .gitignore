@@ -46,5 +46,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Claude Code
-.claude/
+# Claude Code — ローカル設定は無視、共有スキルだけ追跡する
+.claude/*
+!.claude/skills/
