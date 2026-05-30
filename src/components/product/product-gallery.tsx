@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { X, ZoomIn } from "lucide-react";
+import { useState, useEffect } from "react";
+import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ProductGalleryProps {
@@ -13,6 +13,22 @@ interface ProductGalleryProps {
 export function ProductGallery({ images, alt }: ProductGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = modalOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [modalOpen]);
+
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") setActiveIndex((i) => (i - 1 + images.length) % images.length);
+      if (e.key === "ArrowRight") setActiveIndex((i) => (i + 1) % images.length);
+      if (e.key === "Escape") setModalOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [modalOpen, images.length]);
 
   return (
     <>
@@ -74,6 +90,14 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
           >
             <X size={24} strokeWidth={1.5} />
           </button>
+          {images.length > 1 && (
+            <button
+              className="absolute left-4 text-white/70 hover:text-white transition-colors"
+              onClick={(e) => { e.stopPropagation(); setActiveIndex((activeIndex - 1 + images.length) % images.length); }}
+            >
+              <ChevronLeft size={40} strokeWidth={1} />
+            </button>
+          )}
           <div
             className="relative max-w-2xl w-full max-h-[90vh] aspect-[3/4]"
             onClick={(e) => e.stopPropagation()}
@@ -87,6 +111,14 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
               quality={95}
             />
           </div>
+          {images.length > 1 && (
+            <button
+              className="absolute right-4 text-white/70 hover:text-white transition-colors"
+              onClick={(e) => { e.stopPropagation(); setActiveIndex((activeIndex + 1) % images.length); }}
+            >
+              <ChevronRight size={40} strokeWidth={1} />
+            </button>
+          )}
           {images.length > 1 && (
             <div className="absolute bottom-6 flex gap-2">
               {images.map((_, i) => (

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/types/product";
 import { useLanguage } from "@/context/language-context";
+import { ProductGallery } from "@/components/product/product-gallery";
 
 const LINE_URL = "https://lin.ee/o94I6DM";
 
@@ -34,35 +35,13 @@ export default function ProductDetailClient({
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
 
           {/* Left: Images */}
-          <div className="space-y-2">
-            {/* Featured */}
-            <div className="relative overflow-hidden bg-[#0a0908]" style={{ aspectRatio: "3/4" }}>
-              {product.featuredImage ? (
-                <Image
-                  src={product.featuredImage}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  style={{ opacity: 0.85 }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
-              ) : (
-                <div className="absolute inset-0 bg-[#111]" />
-              )}
-            </div>
-
-            {/* Gallery thumbnails */}
-            {product.gallery.length > 0 && (
-              <div className="grid grid-cols-4 gap-1">
-                {product.gallery.map((img, i) => (
-                  <div key={i} className="relative overflow-hidden bg-[#0a0908]" style={{ aspectRatio: "3/4" }}>
-                    <Image src={img} alt={`gallery ${i + 1}`} fill className="object-cover" style={{ opacity: 0.75 }} sizes="25vw" />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ProductGallery
+            images={[
+              ...(product.featuredImage ? [product.featuredImage] : []),
+              ...product.gallery,
+            ]}
+            alt={product.title}
+          />
 
           {/* Right: Info */}
           <div className="space-y-8">
