@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -10,6 +10,11 @@ export const runtime = "edge";
 export const metadata: Metadata = {
   title: { default: "Old, yet new — myself", template: "%s | IAMALIAR" },
   description: "IAMALIAR gives new narratives to mass-produced garments, blurring the boundary between clothing and art.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0908",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
