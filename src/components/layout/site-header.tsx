@@ -16,14 +16,7 @@ export function SiteHeader() {
   ];
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 bg-[#0a0908] border-b border-[#1C1C1C]"
-      style={{
-        paddingTop: "env(safe-area-inset-top)",
-        transform: "translateZ(0)",
-        WebkitTransform: "translateZ(0)",
-      }}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0908] border-b border-[#1C1C1C]">
       <div className="px-3 md:px-12 flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-8 md:py-6">
         {/* PC のみ: 左スペーサー(nav を中央に) */}
         <div className="hidden md:block" aria-hidden />
