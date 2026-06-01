@@ -81,8 +81,13 @@ export function SiteHeader() {
   return (
     <header
       className="sticky top-0 z-50 bg-[#0a0908] md:bg-[#0a0908]/80 md:backdrop-blur-md border-b border-[#1C1C1C]"
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
+      {/* iOS: スクロール中に sticky ヘッダーが数px下へズレても上に本文が覗かないよう、
+          ヘッダー背景を画面外(上方向)まで延長して隙間を常に黒で塞ぐ。env非依存。 */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-full h-[200px] bg-[#0a0908]"
+      />
       {/* モバイル: ハンバーガー / ロゴ / 言語切替 */}
       <div className="md:hidden grid grid-cols-[1fr_auto_1fr] items-center px-3 py-3">
         <button
