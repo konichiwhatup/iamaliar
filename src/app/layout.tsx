@@ -30,6 +30,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <Providers>
+          {/* iOS: スクロール中に sticky ヘッダーがセーフエリアを覆い損ねる帯を、
+              絶対に動かない fixed マスクで常時塞ぐ */}
+          <div
+            aria-hidden
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "env(safe-area-inset-top)",
+              background: "#0a0908",
+              zIndex: 100,
+            }}
+          />
           <Loader />
           <SiteHeader />
           <main className="isolate">{children}</main>
