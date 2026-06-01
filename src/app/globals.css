@@ -23,6 +23,7 @@
   *, *::before, *::after { box-sizing: border-box; }
 
   html {
+    background-color: #0a0908;
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: #6b6560 #0a0908;
