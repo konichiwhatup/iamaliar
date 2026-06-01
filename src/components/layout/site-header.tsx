@@ -79,7 +79,7 @@ export function SiteHeader() {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0908] md:bg-[#0a0908]/80 md:backdrop-blur-md border-b border-[#1C1C1C]">
+    <header className="sticky top-0 z-50 bg-[#0a0908] md:bg-[#0a0908]/80 md:backdrop-blur-md border-b border-[#1C1C1C] pt-[env(safe-area-inset-top)]">
       {/* モバイル: ハンバーガー / ロゴ / 言語切替 */}
       <div className="md:hidden grid grid-cols-[1fr_auto_1fr] items-center px-3 py-3">
         <button
