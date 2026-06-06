@@ -1,5 +1,5 @@
 import { getClient } from './sanity'
-import type { Product, JournalPost, HomeHero } from '@/types/product'
+import type { Product, JournalPost, NewsPost, HomeHero } from '@/types/product'
 
 // 開発環境では fetch キャッシュを完全に無効化(Studio での変更を即時反映)
 // 本番では Next.js のデフォルト挙動に任せる
@@ -115,6 +115,57 @@ export async function getJournalBySlug(slug: string): Promise<JournalPost | unde
     const c = await getClient()
     const doc = await c.fetch(`*[_type == "journal" && slug.current == $slug][0]`, { slug })
     return doc ? toJournal(doc) : undefined
+  } catch {
+    return undefined
+  }
+}
+
+// ── News ────────────────────────────────────────────────────
+function toNews(doc: any): NewsPost {
+  const bodyText = (doc.body ?? [])
+    .filter((b: any) => b._type === 'block')
+    .map((b: any) => b.children?.map((c: any) => c.text).join('') ?? '')
+    .join('\n\n')
+
+  return {
+    id: doc._id,
+    slug: doc.slug?.current ?? '',
+    title: doc.title,
+    excerpt: doc.excerpt,
+    category: doc.category,
+    coverImage: doc.coverImage ? toImageUrl(doc.coverImage) : undefined,
+    body: bodyText,
+    venue: doc.venue,
+    venueMapUrl: doc.venueMapUrl,
+    eventDate: doc.eventDate,
+    externalLink: doc.externalLink,
+    publishedAt: doc.publishedAt ?? doc._createdAt,
+  }
+}
+
+export async function getNewsPosts(): Promise<NewsPost[]> {
+  try {
+    const c = await getClient()
+    const docs = await c.fetch(
+      `*[_type == "news"] | order(publishedAt desc)`,
+      {},
+      cacheOpt(),
+    )
+    return docs.map(toNews)
+  } catch {
+    return []
+  }
+}
+
+export async function getNewsBySlug(slug: string): Promise<NewsPost | undefined> {
+  try {
+    const c = await getClient()
+    const doc = await c.fetch(
+      `*[_type == "news" && slug.current == $slug][0]`,
+      { slug },
+      cacheOpt(),
+    )
+    return doc ? toNews(doc) : undefined
   } catch {
     return undefined
   }

@@ -41,6 +41,7 @@ export default defineConfig({
             S.divider(),
             S.documentTypeListItem('product').title('商品'),
             S.documentTypeListItem('journal').title('ジャーナル'),
+            S.documentTypeListItem('news').title('ニュース'),
             S.documentTypeListItem('faq').title('FAQ'),
           ]),
     }),

@@ -55,3 +55,18 @@ export type JournalPost = {
   publishedAt: string;
   updatedAt?: string;
 };
+
+export type NewsPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt?: string;
+  category: "event" | "info" | "styling";
+  coverImage?: string;
+  body: string;
+  venue?: string;
+  venueMapUrl?: string;
+  eventDate?: string;
+  externalLink?: string;
+  publishedAt: string;
+};

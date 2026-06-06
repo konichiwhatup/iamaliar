@@ -23,6 +23,8 @@ export function SiteFooter() {
             <nav className="flex flex-col gap-3">
               <Link href="/" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">{t.nav.home}</Link>
               <Link href="/collection" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">{t.nav.collection}</Link>
+              <Link href="/journal" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">{t.nav.journal}</Link>
+              <Link href="/news" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">{t.nav.news}</Link>
               <Link href="/contact" className="text-xs text-[#888888] hover:text-[#E8E5DF] transition-colors tracking-wide">{t.nav.contact}</Link>
             </nav>
           </div>

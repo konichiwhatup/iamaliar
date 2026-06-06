@@ -6,6 +6,7 @@ export const translations = {
       home: "Home",
       collection: "Collection",
       journal: "Journal",
+      news: "News",
       contact: "Contact",
     },
     footer: {
@@ -59,7 +60,7 @@ export const translations = {
       heading: "あなたの解釈を聞かせてください。",
       subtext:
         "作品についての質問、オーダーの相談、コラボレーションのご提案など、お気軽にLINEからご連絡ください。",
-      lineOpen: "LINE で問い合わせる",
+      lineOpen: "公式LINEはこちらから",
       items: [
         {
           label: "作品について",
@@ -80,6 +81,12 @@ export const translations = {
       backToList: "← すべての記録へ",
       readMore: "Read →",
       comingSoonText: "記事を準備中です",
+    },
+    news: {
+      subtitle: "新作リリース・イベント・お知らせ。",
+      backToList: "← すべてのニュースへ",
+      readMore: "Read →",
+      comingSoonText: "ニュースを準備中です",
     },
     product: {
       backToCollection: "← Collection",
@@ -106,6 +113,7 @@ export const translations = {
       home: "Home",
       collection: "Collection",
       journal: "Journal",
+      news: "News",
       contact: "Contact",
     },
     footer: {
@@ -181,6 +189,12 @@ export const translations = {
       backToList: "← Back to all entries",
       readMore: "Read →",
       comingSoonText: "Entries are being prepared",
+    },
+    news: {
+      subtitle: "New releases, events & announcements.",
+      backToList: "← All news",
+      readMore: "Read →",
+      comingSoonText: "News is being prepared",
     },
     product: {
       backToCollection: "← Collection",

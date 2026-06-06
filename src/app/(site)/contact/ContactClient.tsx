@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLanguage } from "@/context/language-context";
 
@@ -35,6 +36,16 @@ export function ContactClient() {
 
             {/* Left: LINE CTA */}
             <div className="flex flex-col items-start md:items-center justify-center gap-6">
+              <div className="relative w-full max-w-[320px] aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/home/IMG_1772.jpeg"
+                  alt="IAMALIAR"
+                  fill
+                  className="object-cover"
+                  style={{ opacity: 0.75 }}
+                  sizes="(max-width: 768px) 100vw, 320px"
+                />
+              </div>
               <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase" }}>
                 LINE
               </p>
