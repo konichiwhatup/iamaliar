@@ -26,7 +26,7 @@ Next.js 15 + Sanity CMS で構築し、Cloudflare Pages にデプロイしてい
 ├── src/
 │   ├── app/                  # App Router
 │   │   ├── page.tsx          # メンテナンスページ（現在のトップ）
-│   │   ├── (site)/           # 本来のサイトルート（collection / contact / journal）
+│   │   ├── (site)/           # 本来のサイトルート（collection / contact / journal / news）
 │   │   ├── api/              # APIルート
 │   │   ├── HomeClient.tsx
 │   │   ├── layout.tsx
@@ -111,6 +111,24 @@ brunchを準備し、メンテナンス時にmerge。メンテナンスが終了
 ## Sanity Studio
 
 `iamaliar/` 以下に Studio が同梱されています。詳細は [`iamaliar/README.md`](iamaliar/README.md) を参照してください。
+
+### コンテンツスキーマ一覧
+
+| スキーマ | 用途 |
+| --- | --- |
+| `product` | コレクション作品（一点物） |
+| `journal` | ジャーナル記事（制作過程・思想） |
+| `news` | ニュース（イベント・お知らせ・着用紹介） |
+| `faq` | よくある質問 |
+| `homeHero` | ホームヒーロー画像設定（シングルトン） |
+
+#### `news` スキーマ カテゴリと追加フィールド
+
+| カテゴリ | 追加フィールド |
+| --- | --- |
+| イベント・展示 | 開催場所 / 開催期間 / Google Maps URL |
+| お知らせ | なし |
+| 着用紹介 | 投稿・掲載リンク URL |
 
 ## デプロイ
 
