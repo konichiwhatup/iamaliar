@@ -5,6 +5,7 @@ import Image from "next/image";
 import type { NewsPost } from "@/types/product";
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLanguage } from "@/context/language-context";
+import { safeHref } from "@/lib/utils";
 
 const categoryLabel: Record<string, { ja: string; en: string }> = {
   event:   { ja: "イベント・展示", en: "Event" },
@@ -90,11 +91,11 @@ export default function NewsDetailClient({ post }: { post: NewsPost }) {
                   </span>
                 </div>
               )}
-              {post.venueMapUrl && (
+              {safeHref(post.venueMapUrl) && (
                 <div className="flex items-start gap-6">
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.3em", color: "transparent", flexShrink: 0 }}>----</span>
                   <a
-                    href={post.venueMapUrl}
+                    href={safeHref(post.venueMapUrl)}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.25em", color: "#6b6560", textTransform: "uppercase" }}
@@ -109,11 +110,11 @@ export default function NewsDetailClient({ post }: { post: NewsPost }) {
         )}
 
         {/* Press link */}
-        {post.externalLink && (
+        {safeHref(post.externalLink) && (
           <FadeIn delay={0.15}>
             <div className="max-w-xl mb-12">
               <a
-                href={post.externalLink}
+                href={safeHref(post.externalLink)}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.25em", color: "#a09890", textTransform: "uppercase" }}

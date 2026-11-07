@@ -9,11 +9,14 @@ function cacheOpt() {
 }
 
 // ── 型変換ヘルパー ────────────────────────────────────────────
+const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? '22x23c52'
+const SANITY_DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'productionenabled'
+
 function toImageUrl(image: any): string {
   if (!image?.asset?._ref) return ''
   const ref = image.asset._ref as string
   const [, id, dimensions, format] = ref.split('-')
-  return `https://cdn.sanity.io/images/22x23c52/productionenabled/${id}-${dimensions}.${format}`
+  return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${id}-${dimensions}.${format}`
 }
 
 function toProduct(doc: any): Product {

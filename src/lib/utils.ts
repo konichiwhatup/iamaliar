@@ -17,3 +17,14 @@ export function truncate(str: string, length: number): string {
   if (str.length <= length) return str;
   return str.slice(0, length) + "…";
 }
+
+/** href に使う前に http(s):// のみ許可。それ以外は undefined を返す。 */
+export function safeHref(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const { protocol } = new URL(url);
+    return protocol === "https:" || protocol === "http:" ? url : undefined;
+  } catch {
+    return undefined;
+  }
+}
