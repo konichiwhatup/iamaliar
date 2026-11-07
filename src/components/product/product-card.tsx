@@ -55,6 +55,9 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <StatusBadge status={product.status} className="shrink-0 mt-0.5" />
         </div>
+        <p className="text-sm text-[#E8E5DF] tracking-wide">
+          PRICELESS.
+        </p>
       </div>
     </Link>
   );
