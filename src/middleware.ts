@@ -1,7 +1,35 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import {
+  MAINTENANCE,
+  MAINTENANCE_CSP,
+  MAINTENANCE_HTML,
+  MAINTENANCE_RETRY_AFTER_SECONDS,
+} from '@/lib/maintenance'
+
+const SECURITY_HEADERS: Record<string, string> = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+}
 
 export function middleware(request: NextRequest) {
+  // メンテナンス中は全ページで 503 のメンテ画面を返す(src/lib/maintenance.ts)
+  if (MAINTENANCE) {
+    return new NextResponse(MAINTENANCE_HTML, {
+      status: 503,
+      headers: {
+        ...SECURITY_HEADERS,
+        'Content-Type': 'text/html; charset=utf-8',
+        'Content-Security-Policy': MAINTENANCE_CSP,
+        'Retry-After': String(MAINTENANCE_RETRY_AFTER_SECONDS),
+        'Cache-Control': 'no-store',
+      },
+    })
+  }
+
   const nonce = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
   const isDev = process.env.NODE_ENV === 'development'
 
@@ -26,11 +54,9 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next({ request: { headers: requestHeaders } })
 
   response.headers.set('Content-Security-Policy', csp)
-  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
-  response.headers.set('X-Frame-Options', 'SAMEORIGIN')
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), interest-cohort=()')
+  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+    response.headers.set(key, value)
+  }
 
   return response
 }
