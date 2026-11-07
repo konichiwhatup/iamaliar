@@ -5,7 +5,7 @@ import { useLanguage } from "@/context/language-context";
 
 export default function PhilosophyClient() {
   const { t } = useLanguage();
-  const { eyebrow, title, subtitle, closing, qa } = t.philosophy;
+  const { eyebrow, title, subtitle, closing, intro, qa } = t.philosophy;
 
   return (
     <div className="pt-12 md:pt-20 pb-32">
@@ -23,6 +23,22 @@ export default function PhilosophyClient() {
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: "#555555" }}>
               {subtitle}
             </p>
+          </div>
+        </FadeIn>
+
+        {/* Intro */}
+        <FadeIn delay={0.05}>
+          <div className="mb-20 md:mb-28 max-w-2xl mx-auto text-center space-y-5">
+            {intro.split("\n\n").map((para, i) => (
+              <p key={i} style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.82rem", lineHeight: 2.4, letterSpacing: "0.04em", color: "#6b6560" }}>
+                {para.split("\n").map((line, k, arr) => (
+                  <span key={k}>
+                    {line}
+                    {k < arr.length - 1 && <br />}
+                  </span>
+                ))}
+              </p>
+            ))}
           </div>
         </FadeIn>
 

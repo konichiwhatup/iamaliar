@@ -91,18 +91,19 @@ export default function GalleryClient({ products }: { products: Product[] }) {
 
         {/* LINE CTA */}
         <FadeIn delay={0.2}>
-          <div className="mt-20 pt-12 border-t border-[#1C1C1C] text-center">
-            <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.2rem", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "0.75rem" }}>
-              {t.gallery.ctaText}
-            </p>
+          <div className="mt-20 border-t border-[#1C1C1C] pt-6 space-y-3">
             <a
               href={LINE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline font-mono-label px-10 py-4 inline-block mt-4"
+              style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", color: "#c4a87c", textTransform: "uppercase", display: "block", textDecoration: "underline", textUnderlineOffset: "3px" }}
+              className="hover:opacity-70 transition-opacity"
             >
-              {t.gallery.ctaButton}
+              {t.product.inquireLine}
             </a>
+            <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.72rem", color: "#6b6560", letterSpacing: "0.04em" }}>
+              {t.product.priceNote}
+            </p>
           </div>
         </FadeIn>
 

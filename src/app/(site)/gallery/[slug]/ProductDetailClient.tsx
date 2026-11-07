@@ -62,14 +62,6 @@ export default function ProductDetailClient({
               </h1>
             </div>
 
-            {/* Price */}
-            <div className="border-t border-b border-[#1C1C1C] py-5">
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "1.1rem", letterSpacing: "0.1em", color: "#e8e2d8" }}>
-                ¥{product.price.toLocaleString()}
-                <span style={{ fontSize: "0.5rem", color: "#555555", marginLeft: "0.5rem" }}>{t.product.taxNote}</span>
-              </p>
-            </div>
-
             {/* Description */}
             <div>
               <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.85rem", lineHeight: 2.2, letterSpacing: "0.04em", color: "#aaa8a2", whiteSpace: "pre-wrap" }}>
@@ -120,16 +112,26 @@ export default function ProductDetailClient({
             )}
 
             {/* CTA */}
-            <div className="pt-6 border-t border-[#1C1C1C]">
+            <div className="pt-6 border-t border-[#1C1C1C] space-y-3">
+              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.75rem", color: "#e8e2d8" }}>¥</span>
+                <span style={{ display: "inline-block", width: "7rem", height: "1.1rem", background: "#e8e2d8" }} />
+              </div>
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.2em", color: "#e8e2d8" }}>
+                {t.product.priceLabel}
+              </p>
               <a
                 href={LINE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block w-full text-center border border-[#c4a87c] text-[#c4a87c] py-4 text-xs tracking-[0.25em] uppercase hover:bg-[#c4a87c] hover:text-[#080808] transition-colors"
-                style={{ fontFamily: "'DM Mono', monospace" }}
+                style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", color: "#c4a87c", textTransform: "uppercase", display: "block", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                className="hover:opacity-70 transition-opacity"
               >
-                {t.product.ctaLine}
+                {t.product.inquireLine}
               </a>
+              <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.72rem", color: "#6b6560", letterSpacing: "0.04em" }}>
+                {t.product.priceNote}
+              </p>
             </div>
           </div>
         </div>

@@ -204,23 +204,6 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-24 pt-12 border-t border-[#1C1C1C] flex flex-col sm:flex-row gap-6 reveal">
-          <Link
-            href="/gallery"
-            className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase bg-[#E8E5DF] text-[#080808] px-8 py-4 hover:bg-[#C8B490] transition-colors"
-          >
-            {t.home.ctaCollection}
-          </Link>
-          <a
-            href={LINE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase border border-[#1C1C1C] text-[#E8E5DF] px-8 py-4 hover:border-[#c4a87c] hover:text-[#c4a87c] transition-colors"
-          >
-            {t.home.ctaLine}
-          </a>
-        </div>
       </div>
     </>
   );
