@@ -8,20 +8,6 @@ import type { HomeHero } from "@/types/product";
 
 const LINE_URL = "https://lin.ee/o94I6DM";
 
-const sectionImages = [
-  // 1. 「私は嘘つきです」
-  "/home/IMG_1772.jpeg",
-  // 2. 「衝撃を、纏う」
-  "/home/IMG_1769.jpeg",
-  // 3. 「額縁に飾れる服作り」
-  "/home/IMG_1768.jpeg",
-  // 4. 「既製品を物語のある一点ものに変換する」
-  "/home/IMG_1770.jpeg",
-  // 5. 「刺し子」
-  "/home/S__11411469.jpg",
-];
-
-const imageRights = [true, false, true, false, true];
 
 function useReveal() {
   useEffect(() => {
@@ -142,7 +128,7 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
             >
               {hero?.heroLinkSlug ? (
                 <Link
-                  href={`/collection/${hero.heroLinkSlug}`}
+                  href={`/gallery/${hero.heroLinkSlug}`}
                   className="inline-block hover:opacity-80 transition-opacity"
                 >
                   {captionInner}
@@ -184,20 +170,18 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
           </h2>
         </div>
 
-        <div className="space-y-20 md:space-y-32">
+        <div className="space-y-20 md:space-y-32 max-w-2xl mx-auto">
           {sections.map((section, i) => (
             <div key={i}>
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-0 reveal ${imageRights[i] ? "" : "md:[&>*:first-child]:order-2"}`}>
-
-                {/* Text side */}
-                <div className={`flex flex-col justify-center py-8 ${imageRights[i] ? "md:pr-16" : "md:pl-16 md:order-2"}`}>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.35em", color: "#2e2e2e", display: "block", marginBottom: "1.5rem" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.3rem, 2vw, 1.8rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
-                    {section.heading}
-                  </h3>
-                  {section.body && <div className="space-y-4">
+              <div className="reveal">
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.35em", color: "#2e2e2e", display: "block", marginBottom: "1.5rem" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(1.3rem, 2vw, 1.8rem)", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                  {section.heading}
+                </h3>
+                {section.body && (
+                  <div className="space-y-4">
                     {section.body.split("\n\n").map((para, j) => (
                       <p key={j} style={{
                         fontFamily: "'Noto Serif JP', serif",
@@ -210,22 +194,8 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
                         {para}
                       </p>
                     ))}
-                  </div>}
-                </div>
-
-                {/* Image side */}
-                <div className={`relative overflow-hidden ${imageRights[i] ? "" : "md:order-1"}`} style={{ aspectRatio: "4/5" }}>
-                  <Image
-                    src={sectionImages[i]}
-                    alt={section.imageAlt}
-                    fill
-                    className={i === 0 ? "object-contain" : "object-cover"}
-                    style={{ opacity: 0.55, filter: "sepia(0.2) contrast(1.05)" }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(10,9,8,0.3) 0%, transparent 60%, rgba(10,9,8,0.4) 100%)" }} />
-                </div>
-
+                  </div>
+                )}
               </div>
               {i < sections.length - 1 && (
                 <div className="mt-20 md:mt-32 border-b border-[#1C1C1C]" />
@@ -237,7 +207,7 @@ export default function HomeClient({ hero }: { hero?: HomeHero }) {
         {/* CTA */}
         <div className="mt-24 pt-12 border-t border-[#1C1C1C] flex flex-col sm:flex-row gap-6 reveal">
           <Link
-            href="/collection"
+            href="/gallery"
             className="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase bg-[#E8E5DF] text-[#080808] px-8 py-4 hover:bg-[#C8B490] transition-colors"
           >
             {t.home.ctaCollection}

@@ -2,9 +2,9 @@ export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 import { getProducts } from "@/lib/queries";
-import CollectionClient from "./CollectionClient";
+import GalleryClient from "./GalleryClient";
 
-export default async function CollectionPage() {
+export default async function GalleryPage() {
   const products = await getProducts();
-  return <CollectionClient products={products} />;
+  return <GalleryClient products={products} />;
 }

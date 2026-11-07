@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { FadeIn } from "@/components/ui/fade-in";
 import { useLanguage } from "@/context/language-context";
 
 const LINE_URL = "https://lin.ee/o94I6DM";
+const INSTAGRAM_URL = "https://www.instagram.com/watashi_wa_usotsuki_desu/";
 
 export function ContactClient() {
   const { t } = useLanguage();
@@ -34,29 +34,34 @@ export function ContactClient() {
         <FadeIn delay={0.1}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
-            {/* Left: LINE CTA */}
-            <div className="flex flex-col items-start md:items-center justify-center gap-6">
-              <div className="relative w-full max-w-[320px] aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/home/IMG_1772.jpeg"
-                  alt="IAMALIAR"
-                  fill
-                  className="object-cover"
-                  style={{ opacity: 0.75 }}
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
+            {/* Left: LINE & Instagram CTA */}
+            <div className="flex flex-col items-start md:items-center justify-center gap-10">
+              <div className="flex flex-col items-start md:items-center gap-4 w-full max-w-[320px]">
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase" }}>
+                  LINE
+                </p>
+                <a
+                  href={LINE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline font-mono-label px-10 py-4 inline-block text-center w-full"
+                >
+                  {lineOpen}
+                </a>
               </div>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase" }}>
-                LINE
-              </p>
-              <a
-                href={LINE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline font-mono-label px-10 py-4 inline-block text-center"
-              >
-                {lineOpen}
-              </a>
+              <div className="flex flex-col items-start md:items-center gap-4 w-full max-w-[320px]">
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase" }}>
+                  Instagram
+                </p>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline font-mono-label px-10 py-4 inline-block text-center w-full"
+                >
+                  {t.contact.instagramOpen}
+                </a>
+              </div>
             </div>
 
             {/* Right: Notes */}

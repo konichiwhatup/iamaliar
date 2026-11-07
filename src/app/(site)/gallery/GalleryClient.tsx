@@ -1,32 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Product, ProductCategory } from "@/types/product";
+import type { Product } from "@/types/product";
 import { FadeIn } from "@/components/ui/fade-in";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
 
 const LINE_URL = "https://lin.ee/o94I6DM";
 
-const categoryLabels: Record<ProductCategory | "all", string> = {
-  all: "All",
-  pants: "Pants",
-  jacket: "Jacket",
-  shirt: "Shirt",
-  other: "Other",
-};
-
-export default function CollectionClient({ products }: { products: Product[] }) {
-  const [category, setCategory] = useState<ProductCategory | "all">("all");
+export default function GalleryClient({ products }: { products: Product[] }) {
   const [hovered, setHovered] = useState<string | null>(null);
   const { t } = useLanguage();
-
-  const filtered = useMemo(() => {
-    if (category === "all") return products;
-    return products.filter((p) => p.category === category);
-  }, [category, products]);
 
   return (
     <div className="pt-12 md:pt-20 pb-20">
@@ -39,55 +24,32 @@ export default function CollectionClient({ products }: { products: Product[] }) 
               I AM A LIAR
             </p>
             <h1 style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "0.1em", color: "#E8E5DF" }}>
-              Collection
+              Gallery
             </h1>
             <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.85rem", color: "#888888", marginTop: "1rem", lineHeight: 1.8 }}>
-              {t.collection.subtitle}
+              {t.gallery.subtitle}
             </p>
           </div>
         </FadeIn>
 
-        {/* Filter */}
-        <FadeIn delay={0.1}>
-          <div className="flex flex-wrap items-center gap-2 mb-12 pb-6 border-b border-[#1C1C1C]">
-            {(Object.keys(categoryLabels) as (ProductCategory | "all")[]).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setCategory(cat)}
-                className={cn(
-                  "text-xs tracking-[0.12em] uppercase px-3 py-1.5 border transition-colors",
-                  category === cat
-                    ? "bg-[#E8E5DF] text-[#080808] border-[#E8E5DF]"
-                    : "text-[#888888] border-[#1C1C1C] hover:border-[#E8E5DF] hover:text-[#E8E5DF]"
-                )}
-              >
-                {categoryLabels[cat]}
-              </button>
-            ))}
-            <span className="ml-auto" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.2em", color: "#555555" }}>
-              {filtered.length} works
-            </span>
-          </div>
-        </FadeIn>
-
         {/* Gallery */}
-        {filtered.length === 0 ? (
+        {products.length === 0 ? (
           <FadeIn delay={0.15}>
             <div className="flex flex-col items-center justify-center py-32 text-center">
               <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: "#333333", textTransform: "uppercase", marginBottom: "1.5rem" }}>
                 — coming soon —
               </p>
               <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.1rem", letterSpacing: "0.1em", color: "#555555", lineHeight: 2 }}>
-                {t.collection.comingSoonText}
+                {t.gallery.comingSoonText}
               </p>
             </div>
           </FadeIn>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#1e1a17]">
-            {filtered.map((product, i) => (
+            {products.map((product, i) => (
               <FadeIn key={product.id} delay={i * 0.04}>
                 <Link
-                  href={`/collection/${product.slug}`}
+                  href={`/gallery/${product.slug}`}
                   className="relative bg-[#0a0908] overflow-hidden block"
                   style={{ aspectRatio: "3/4" }}
                   onMouseEnter={() => setHovered(product.id)}
@@ -131,7 +93,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
         <FadeIn delay={0.2}>
           <div className="mt-20 pt-12 border-t border-[#1C1C1C] text-center">
             <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 200, fontSize: "1.2rem", letterSpacing: "0.08em", color: "#e8e2d8", marginBottom: "0.75rem" }}>
-              {t.collection.ctaText}
+              {t.gallery.ctaText}
             </p>
             <a
               href={LINE_URL}
@@ -139,7 +101,7 @@ export default function CollectionClient({ products }: { products: Product[] }) 
               rel="noopener noreferrer"
               className="btn-outline font-mono-label px-10 py-4 inline-block mt-4"
             >
-              {t.collection.ctaButton}
+              {t.gallery.ctaButton}
             </a>
           </div>
         </FadeIn>

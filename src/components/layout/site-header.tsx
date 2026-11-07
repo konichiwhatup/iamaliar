@@ -12,8 +12,8 @@ export function SiteHeader() {
 
   // モバイルドロワー用 (home はロゴから飛ぶため含めない)
   const navLinks = [
-    { href: "/collection", label: t.nav.collection },
-    { href: "/journal", label: t.nav.journal },
+    { href: "/philosophy", label: t.nav.philosophy },
+    { href: "/gallery", label: t.nav.gallery },
     { href: "/news", label: t.nav.news },
     { href: "/contact", label: t.nav.contact },
   ];

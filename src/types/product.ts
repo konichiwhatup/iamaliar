@@ -40,22 +40,6 @@ export type HomeHero = {
   heroImageOpacity?: number;
 };
 
-export type JournalPost = {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt?: string;
-  category: "process" | "concept" | "archive" | "exhibition" | "note";
-  tags: string[];
-  coverImage?: string;
-  body: string;
-  relatedProducts?: string[];
-  relatedLookbooks?: string[];
-  author?: string;
-  publishedAt: string;
-  updatedAt?: string;
-};
-
 export type NewsPost = {
   id: string;
   slug: string;

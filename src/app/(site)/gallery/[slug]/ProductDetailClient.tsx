@@ -24,11 +24,11 @@ export default function ProductDetailClient({
 
         {/* Back */}
         <Link
-          href="/collection"
+          href="/gallery"
           style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.25em", color: "#555555", textTransform: "uppercase" }}
           className="hover:text-[#e8e2d8] transition-colors"
         >
-          {t.product.backToCollection}
+          {t.product.backToGallery}
         </Link>
 
         {/* Main layout */}
@@ -142,7 +142,7 @@ export default function ProductDetailClient({
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#1e1a17]">
               {related.map((r) => (
-                <Link key={r.id} href={`/collection/${r.slug}`} className="relative bg-[#0a0908] overflow-hidden block" style={{ aspectRatio: "3/4" }}>
+                <Link key={r.id} href={`/gallery/${r.slug}`} className="relative bg-[#0a0908] overflow-hidden block" style={{ aspectRatio: "3/4" }}>
                   {r.featuredImage ? (
                     <Image src={r.featuredImage} alt={r.title} fill className="object-cover" style={{ opacity: 0.65 }} sizes="33vw" />
                   ) : (

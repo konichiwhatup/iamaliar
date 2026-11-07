@@ -1,4 +1,4 @@
-import type { Product, Lookbook, JournalPost } from "@/types/product";
+import type { Product, Lookbook } from "@/types/product";
 
 // ── CMS移行用テンプレート ────────────────────────────────────────────
 // 以下のフォーマットで作品を追加してください。
@@ -103,49 +103,6 @@ export const mockLookbooks: Lookbook[] = [
       },
     ],
     publishedAt: "2024-10-15",
-  },
-];
-
-// Sanity に記事が無いときのフォールバック用デモ記事(2件のみ)
-export const mockJournals: JournalPost[] = [
-  {
-    id: "j001",
-    slug: "why-i-reconstruct-denim",
-    title: "なぜデニムを再構築するのか",
-    excerpt:
-      "既製品に対する違和感から始まった。量産されたものが持つ、均質な美しさへの疑問。",
-    category: "concept",
-    tags: ["denim", "philosophy", "reconstruction"],
-    coverImage: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=90",
-    body: `既製品に対する違和感から始まった。
-
-量産されたものが持つ、均質な美しさへの疑問。どこかで見たことのある形、誰でも着られる服。それが悪いわけではない。ただ、私にはそれが物足りなかった。
-
-デニムを選んだのは偶然ではない。デニムは最も「普通」の象徴として、最も量産されてきた素材だ。Levi'sの501は、何百万本も作られた。その中の一本に、固有の物語を与えること。それがIAMALIARの始まりだった。
-
-再構築とは破壊ではない。翻訳だ。`,
-    relatedProducts: ["p001"],
-    author: "IAMALIAR",
-    publishedAt: "2025-03-05",
-  },
-  {
-    id: "j002",
-    slug: "sashiko-technique-and-philosophy",
-    title: "刺し子という技法と思想",
-    excerpt: "日本の伝統的な修繕技術が、現代の服にどう接続するか。",
-    category: "process",
-    tags: ["sashiko", "technique", "japanese-craft"],
-    coverImage: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=90",
-    body: `刺し子は本来、布を強化するための技術だった。
-
-江戸時代、庶民は高価な布を大切に使うために、糸を幾重にも重ねてステッチを施した。それがいつしか、装飾的な美しさを持つようになった。
-
-壊れたものを直す行為が、美に昇華された。
-
-私がデニムに刺し子を施すとき、その歴史的な文脈を意識している。現代の量産品に、手仕事の時間を刻むこと。それは批評であり、敬意でもある。`,
-    relatedProducts: ["p001", "p004"],
-    author: "IAMALIAR",
-    publishedAt: "2025-02-20",
   },
 ];
 
