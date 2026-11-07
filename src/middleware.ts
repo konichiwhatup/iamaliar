@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(_request: NextRequest) {
+export function middleware(request: NextRequest) {
+  const nonce = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
   const isDev = process.env.NODE_ENV === 'development'
 
   const csp = [
     "default-src 'self'",
-    `script-src 'self'${isDev ? " 'unsafe-eval'" : ''} https://static.cloudflareinsights.com`,
+    `script-src 'self' 'nonce-${nonce}'${isDev ? " 'unsafe-eval'" : ''} https://static.cloudflareinsights.com`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https://cdn.sanity.io https://images.unsplash.com",
@@ -18,7 +19,11 @@ export function middleware(_request: NextRequest) {
     "upgrade-insecure-requests",
   ].join('; ')
 
-  const response = NextResponse.next()
+  // x-nonce を Next.js に渡す → Next.js が自身のインラインスクリプトへ自動付与する
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-nonce', nonce)
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } })
 
   response.headers.set('Content-Security-Policy', csp)
   response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
