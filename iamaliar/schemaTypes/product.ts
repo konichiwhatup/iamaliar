@@ -27,27 +27,6 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'price',
-      title: '値段 (JPY)',
-      type: 'number',
-      validation: (Rule) => Rule.required().min(0),
-    }),
-    defineField({
-      name: 'category',
-      title: 'カテゴリ',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Pants', value: 'pants' },
-          { title: 'Jacket', value: 'jacket' },
-          { title: 'Shirt', value: 'shirt' },
-          { title: 'Other', value: 'other' },
-        ],
-        layout: 'radio',
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'story',
       title: '制作ストーリー',
       type: 'text',
@@ -102,14 +81,13 @@ export default defineType({
       title: '公開日(表示用・並び順用)',
       type: 'datetime',
       description:
-        '⚠️ この「公開日」と、Sanity の「Scheduled Publishing(予約公開)」は別物です。\n' +
+        '⚠️ この「公開日」と Sanity の「Scheduled Publishing（予約公開）」は別物です。\n' +
         '\n' +
-        '【この欄(公開日)】サイト一覧での並び順(新しい順)に使われるだけの日付。' +
+        '【この欄（公開日）】サイト一覧の並び順（新しい順）にのみ使われます。' +
         'ここの日付を未来にしても自動では公開されません。今すぐ公開したいときは右下の Publish を押してください。\n' +
         '\n' +
-        '【予約公開したいとき】右下の Publish ボタン横の「▼」→「Schedule…」から日時指定してください。' +
-        '予約一覧は左メニューの Scheduled タブで確認できます。' +
-        '予約公開する場合は、こちらの「公開日」も同じ日時に揃えておくと一覧の並び順がズレません。',
+        '【予約公開について】現在のプランでは Scheduled Publishing は利用できません。' +
+        '公開したいタイミングでこの画面を開き、右下の「Publish」ボタンを手動で押してください。',
       initialValue: () => new Date().toISOString(),
     }),
   ],

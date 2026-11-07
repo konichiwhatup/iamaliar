@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { formatPrice } from "@/lib/utils";
+
 import { StatusBadge } from "@/components/ui/status-badge";
 import type { Product } from "@/types/product";
 
@@ -55,9 +55,6 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <StatusBadge status={product.status} className="shrink-0 mt-0.5" />
         </div>
-        <p className="text-sm text-[#E8E5DF] tracking-wide">
-          {formatPrice(product.price)}
-        </p>
       </div>
     </Link>
   );

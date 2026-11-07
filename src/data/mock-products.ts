@@ -116,6 +116,6 @@ export function getLookbookBySlug(slug: string): Lookbook | undefined {
 
 export function getRelatedProducts(product: Product): Product[] {
   return mockProducts
-    .filter((p) => p.id !== product.id && p.category === product.category)
+    .filter((p) => p.id !== product.id)
     .slice(0, 3);
 }

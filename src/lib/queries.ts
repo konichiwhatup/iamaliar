@@ -24,12 +24,10 @@ function toProduct(doc: any): Product {
     id: doc._id,
     slug: doc.slug?.current ?? '',
     status: doc.status,
-    category: doc.category,
     title: doc.title,
     description: doc.description ?? '',
     story: doc.story,
     material: doc.material,
-    price: doc.price ?? 0,
     sizes: doc.sizes ?? [],
     featuredImage: toImageUrl(doc.featuredImage),
     gallery: (doc.gallery ?? []).map(toImageUrl),
@@ -70,8 +68,8 @@ export async function getRelatedProducts(product: Product): Promise<Product[]> {
   try {
     const c = await getClient()
     const docs = await c.fetch(
-      `*[_type == "product" && category == $category && _id != $id] | order(publishedAt desc)[0...3]`,
-      { category: product.category, id: product.id },
+      `*[_type == "product" && _id != $id] | order(publishedAt desc)[0...3]`,
+      { id: product.id },
       cacheOpt(),
     )
     return docs.map(toProduct)

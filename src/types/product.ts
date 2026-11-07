@@ -1,16 +1,13 @@
 export type ProductStatus = "active" | "sold" | "archived" | "made_to_order";
-export type ProductCategory = "pants" | "jacket" | "shirt" | "other";
 
 export type Product = {
   id: string;
   slug: string;
   status: ProductStatus;
-  category: ProductCategory;
   title: string;
   description: string;
   story?: string;
   material?: string;
-  price: number;
   sizes: string[];
   featuredImage: string;
   gallery: string[];
