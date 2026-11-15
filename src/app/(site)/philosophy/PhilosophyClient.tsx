@@ -30,7 +30,7 @@ export default function PhilosophyClient() {
         <FadeIn delay={0.05}>
           <div className="mb-20 md:mb-28 max-w-2xl mx-auto text-center space-y-5">
             {intro.split("\n\n").map((para, i) => (
-              <p key={i} style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.82rem", lineHeight: 2.4, letterSpacing: "0.04em", color: "#6b6560" }}>
+              <p key={i} style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.82rem", lineHeight: 2.4, letterSpacing: "0.04em", color: "#6b6560", wordBreak: "auto-phrase" as never, lineBreak: "strict" }}>
                 {para.split("\n").map((line, k, arr) => (
                   <span key={k}>
                     {line}
@@ -65,7 +65,7 @@ export default function PhilosophyClient() {
                 {/* Answer */}
                 <div className="space-y-5">
                   {item.a.split("\n\n").map((para, j) => (
-                    <p key={j} style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.82rem", lineHeight: 2.4, letterSpacing: "0.04em", color: "#6b6560" }}>
+                    <p key={j} style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.82rem", lineHeight: 2.4, letterSpacing: "0.04em", color: "#6b6560", wordBreak: "auto-phrase" as never, lineBreak: "strict" }}>
                       {para.split("\n").map((line, k, arr) => (
                         <span key={k}>
                           {line}
