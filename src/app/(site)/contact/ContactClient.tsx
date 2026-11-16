@@ -8,7 +8,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/watashi_wa_usotsuki_desu/";
 
 export function ContactClient() {
   const { t } = useLanguage();
-  const { label, heading, subtext, lineOpen, items, faq } = t.contact;
+  const { label, heading, subtext, lineOpen, items } = t.contact;
 
   return (
     <div className="min-h-screen flex flex-col justify-center pt-12 pb-20">
@@ -27,29 +27,8 @@ export function ContactClient() {
           </p>
         </FadeIn>
 
-        {/* FAQ */}
-        <FadeIn delay={0.1}>
-          <div className="mt-16 border-t border-[#1C1C1C] pt-12">
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#555555", textTransform: "uppercase", marginBottom: "2rem" }}>
-              {faq.label}
-            </p>
-            <div className="space-y-10 max-w-2xl">
-              {faq.items.map((item, i) => (
-                <div key={i}>
-                  <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.85rem", letterSpacing: "0.08em", color: "#c8c2b8", marginBottom: "0.6rem", lineHeight: 1.7 }}>
-                    {item.q}
-                  </p>
-                  <p style={{ fontFamily: "'Noto Serif JP', serif", fontWeight: 300, fontSize: "0.78rem", lineHeight: 1.9, color: "#6b6560" }}>
-                    {item.a}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
-
         {/* Divider */}
-        <div className="my-16 border-t border-[#1C1C1C]" />
+        <div className="mt-16 border-t border-[#1C1C1C]" />
 
         {/* LINE Block */}
         <FadeIn delay={0.2}>

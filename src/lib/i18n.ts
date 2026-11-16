@@ -72,15 +72,6 @@ export const translations = {
           body: "一点物のため、在庫状況や納期はLINEにて確認いたします。",
         },
       ],
-      faq: {
-        label: "FAQ",
-        items: [
-          {
-            q: "商品の購入をしたい場合はどうすればいいですか",
-            a: "問い合わせよりお願いします。InstagramまたはLINEからご連絡いただけます。",
-          },
-        ],
-      },
     },
     news: {
       subtitle: "新作リリース・イベント・お知らせ。",
@@ -308,15 +299,6 @@ NOT FOR WEARING. は、作品の存在を「着る」という目的だけに限
           body: "As all pieces are one-of-a-kind, please check availability and lead times via LINE.",
         },
       ],
-      faq: {
-        label: "FAQ",
-        items: [
-          {
-            q: "How do I purchase an item?",
-            a: "Please reach out via the contact form — Instagram or LINE are both welcome.",
-          },
-        ],
-      },
     },
     news: {
       subtitle: "New releases, events & announcements.",
