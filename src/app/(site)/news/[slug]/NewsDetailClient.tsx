@@ -74,7 +74,7 @@ export default function NewsDetailClient({ post }: { post: NewsPost }) {
         <div className="border-t border-[#1C1C1C] mb-14" />
 
         {/* Event info */}
-        {(post.venue || post.eventDate) && (
+        {post.category === 'event' && (post.venue || post.eventDate) && (
           <FadeIn delay={0.15}>
             <div className="max-w-xl mb-12 space-y-4 border border-[#1C1C1C] px-6 py-5">
               {post.eventDate && (
