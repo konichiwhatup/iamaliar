@@ -42,6 +42,9 @@ yarn-error.log*
 # local photo holding folder (sources, not deployed)
 /photo/
 
+# work logs (local only)
+/作業過程/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
