@@ -113,6 +113,13 @@ export default function ProductDetailClient({
 
             {/* CTA */}
             <div className="pt-6 border-t border-[#1C1C1C] space-y-3">
+              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.75rem", color: "#e8e2d8" }}>¥</span>
+                <span style={{ display: "inline-block", width: "7rem", height: "1.1rem", background: "#e8e2d8" }} />
+              </div>
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.2em", color: "#e8e2d8" }}>
+                {t.product.priceLabel}
+              </p>
               <a
                 href={LINE_URL}
                 target="_blank"
