@@ -40,7 +40,7 @@ export async function getProducts(): Promise<Product[]> {
   try {
     const c = await getClient()
     const docs = await c.fetch(
-      `*[_type == "product"] | order(publishedAt desc)`,
+      `*[_type == "product"] | order(publishedAt asc)`,
       {},
       cacheOpt(),
     )
