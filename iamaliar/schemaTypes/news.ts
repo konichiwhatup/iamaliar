@@ -112,6 +112,13 @@ export default defineType({
   ],
   preview: {
     select: { title: 'title', subtitle: 'category', media: 'coverImage' },
-    prepare: ({ title, subtitle, media }) => ({ title, subtitle, media }),
+    prepare: ({ title, subtitle, media }) => {
+      const labels: Record<string, string> = {
+        event: 'イベント・展示',
+        info: 'お知らせ',
+        styling: '着用紹介',
+      }
+      return { title, subtitle: labels[subtitle as string] ?? subtitle, media }
+    },
   },
 })

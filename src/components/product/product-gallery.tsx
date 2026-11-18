@@ -42,7 +42,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
             src={images[activeIndex]}
             alt={alt}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 55vw"
             priority
           />
@@ -69,7 +69,7 @@ export function ProductGallery({ images, alt }: ProductGalleryProps) {
                   src={img}
                   alt={`${alt} ${i + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   sizes="64px"
                 />
               </button>

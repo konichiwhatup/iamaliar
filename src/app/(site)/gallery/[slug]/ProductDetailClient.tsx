@@ -146,7 +146,7 @@ export default function ProductDetailClient({
               {related.map((r) => (
                 <Link key={r.id} href={`/gallery/${r.slug}`} className="relative bg-[#0a0908] overflow-hidden block" style={{ aspectRatio: "3/4" }}>
                   {r.featuredImage ? (
-                    <Image src={r.featuredImage} alt={r.title} fill className="object-cover" style={{ opacity: 0.65 }} sizes="33vw" />
+                    <Image src={r.featuredImage} alt={r.title} fill className="object-contain" style={{ opacity: 0.65 }} sizes="33vw" />
                   ) : (
                     <div className="absolute inset-0 bg-[#111]" />
                   )}

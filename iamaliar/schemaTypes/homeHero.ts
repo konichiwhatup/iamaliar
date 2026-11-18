@@ -26,7 +26,7 @@ export default defineType({
     }),
     defineField({
       name: 'heroLink',
-      title: 'リンク先の商品(任意)',
+      title: 'リンク先の作品(任意)',
       type: 'reference',
       to: [{ type: 'product' }],
       description:

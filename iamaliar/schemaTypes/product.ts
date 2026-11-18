@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'product',
-  title: '商品 (Product)',
+  title: 'ギャラリー (Gallery)',
   type: 'document',
   fields: [
     defineField({
@@ -52,10 +52,8 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: '販売中', value: 'active' },
-          { title: 'Sold (販売済み)', value: 'sold' },
-          { title: '受注制作', value: 'made_to_order' },
-          { title: 'アーカイブ', value: 'archived' },
+          { title: '販売中 (For Sale)', value: 'active' },
+          { title: '完売 (Sold Out)', value: 'sold' },
         ],
         layout: 'radio',
       },
@@ -96,9 +94,7 @@ export default defineType({
     prepare: ({ title, subtitle, media }) => {
       const labels: Record<string, string> = {
         active: '販売中',
-        sold: 'Sold',
-        made_to_order: '受注制作',
-        archived: 'アーカイブ',
+        sold: '完売',
       }
       return {
         title,

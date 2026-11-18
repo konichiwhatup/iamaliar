@@ -83,7 +83,7 @@ export const translations = {
       backToGallery: "← Gallery",
       status: {
         active: "販売中",
-        sold: "Sold",
+        sold: "完売",
         made_to_order: "受注制作",
         archived: "アーカイブ",
       },
@@ -309,8 +309,8 @@ NOT FOR WEARING. は、作品の存在を「着る」という目的だけに限
     product: {
       backToGallery: "← Gallery",
       status: {
-        active: "Available",
-        sold: "Sold",
+        active: "For Sale",
+        sold: "Sold Out",
         made_to_order: "Made to order",
         archived: "Archived",
       },

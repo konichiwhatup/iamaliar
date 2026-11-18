@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
           alt={product.title}
           fill
           className={cn(
-            "object-cover transition-all duration-700",
+            "object-contain transition-all duration-700",
             isSold && "opacity-60 grayscale",
             "group-hover:scale-[1.03]"
           )}

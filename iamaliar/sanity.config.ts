@@ -39,7 +39,7 @@ export default defineConfig({
                   .title('ホーム画面ヒーロー設定'),
               ),
             S.divider(),
-            S.documentTypeListItem('product').title('商品'),
+            S.documentTypeListItem('product').title('ギャラリー'),
             S.documentTypeListItem('news').title('ニュース'),
           ]),
     }),

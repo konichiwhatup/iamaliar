@@ -64,7 +64,7 @@ export default function GalleryClient({ products }: { products: Product[] }) {
                       }
                       alt={product.title}
                       fill
-                      className="object-cover transition-all duration-700"
+                      className="object-contain transition-all duration-700"
                       style={{
                         opacity: hovered === product.id ? 0.85 : 0.65,
                         transform: hovered === product.id ? "scale(1.03)" : "scale(1)",
