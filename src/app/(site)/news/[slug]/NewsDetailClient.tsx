@@ -35,12 +35,12 @@ export default function NewsDetailClient({ post }: { post: NewsPost }) {
         {/* Cover image */}
         {post.coverImage && (
           <FadeIn delay={0.05}>
-            <div className="relative mt-10 mb-12 w-full" style={{ aspectRatio: "21/9", maxHeight: "460px" }}>
+            <div className="relative mt-10 mb-12 w-full" style={{ aspectRatio: "4/3", maxHeight: "460px" }}>
               <Image
                 src={post.coverImage}
                 alt={post.title}
                 fill
-                className="object-cover"
+                className="object-contain"
                 style={{ opacity: 0.65 }}
                 sizes="100vw"
                 priority
