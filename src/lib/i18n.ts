@@ -309,7 +309,7 @@ NOT FOR WEARING. は、作品の存在を「着る」という目的だけに限
     product: {
       backToGallery: "← Gallery",
       status: {
-        active: "For Sale",
+        active: "Available",
         sold: "Sold Out",
         made_to_order: "Made to order",
         archived: "Archived",
